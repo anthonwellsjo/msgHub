@@ -12,7 +12,7 @@ Collaborative white board application for YMCA Hotels. Updates UI with ASP.Net C
 
 
 
-## Responsivity, in order of priority:
+## Media in order of priority:
 
 1. Ipad
 2. Mobile
