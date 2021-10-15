@@ -37,7 +37,7 @@ Mitt projekt är en hybrid av dessa två idéer.
 ### User story Kanban:
 <img width="1334" alt="Screenshot 2021-10-15 at 14 53 30" src="https://user-images.githubusercontent.com/58119759/137489892-e0dff340-19e3-4774-9400-17bd9f8214ee.png">
 
-### Andra artefakter knutna till projektet vid inlämning 1 (dessa lämnas in som levande dokument eftersom de inte ingår i kravlistan)
+## Andra artefakter knutna till projektet vid inlämning 1 (dessa lämnas in som levande dokument eftersom de inte ingår i kravlistan)
 Figma mockup: https://www.figma.com/file/ix15n10IvOB9cRe9U0wHcX/Flat-iPad-mini-Air-and-Pro-Mockup-Community?node-id=1%3A14
 
 Current data structures: https://drive.google.com/file/d/18GRQTSJHfc6mmcr0kLb6YydNYSQFZVtf/view?usp=sharing
