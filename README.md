@@ -20,14 +20,16 @@ Collaborative white board application for YMCA Hotels. Updates UI with ASP.Net C
 2. Mobile
 3. Desktop
 
-## Inlämning 1: Planering
+# Inlämning 1: Planering
 
-### Idé
+## Idé
 Idé 1: Ett digitalt klotterplank eller whiteboard, där alla kan rita. 
 &
 Idé 4: Ett kollaborativt textdokument, som alla kan skriva i samtidigt.
 
 Mitt projekt är en hybrid av dessa två idéer. 
+
+## Tillfällig planering
 
 ### Project Kanban: 
 <img width="1331" alt="Screenshot 2021-10-15 at 14 51 29" src="https://user-images.githubusercontent.com/58119759/137489959-9cb4533c-a84e-4859-a0ff-86287734e4b2.png">
