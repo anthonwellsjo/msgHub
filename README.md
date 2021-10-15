@@ -14,7 +14,6 @@ Collaborative white board application for YMCA Hotels. Updates UI with ASP.Net C
 - ASP.net SignalR client.
 
 
-
 ## Media in order of priority:
 
 1. Ipad
