@@ -1,7 +1,6 @@
 # msgHub
 
 ## Concept
-Idé:1. Ett digitalt klotterplank eller whiteboard, där alla kan rita.
 
 Collaborative white board application for YMCA Hotels. Updates UI with ASP.Net Core SignalR to let staff communicate working task inrealtime drawing, or writing on a common document.
 
@@ -22,3 +21,22 @@ Collaborative white board application for YMCA Hotels. Updates UI with ASP.Net C
 2. Mobile
 3. Desktop
 
+## Inlämning 1: Planering
+
+### Idé
+Idé 1: Ett digitalt klotterplank eller whiteboard, där alla kan rita. 
+&
+Idé 4: Ett kollaborativt textdokument, som alla kan skriva i samtidigt.
+
+Mitt projekt är en hybrid av dessa två idéer. 
+
+### Project Kanban: 
+<img width="1331" alt="Screenshot 2021-10-15 at 14 51 29" src="https://user-images.githubusercontent.com/58119759/137489959-9cb4533c-a84e-4859-a0ff-86287734e4b2.png">
+
+### User story Kanban:
+<img width="1334" alt="Screenshot 2021-10-15 at 14 53 30" src="https://user-images.githubusercontent.com/58119759/137489892-e0dff340-19e3-4774-9400-17bd9f8214ee.png">
+
+### Andra artefakter knutna till projektet
+Figma mockup: https://www.figma.com/file/ix15n10IvOB9cRe9U0wHcX/Flat-iPad-mini-Air-and-Pro-Mockup-Community?node-id=1%3A14
+
+Current data structures: https://drive.google.com/file/d/18GRQTSJHfc6mmcr0kLb6YydNYSQFZVtf/view?usp=sharing
