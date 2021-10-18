@@ -1,10 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import SignalRManager from './Components/SignalR/SignalRManager';
 
 function App() {
   return (
     <div className="App">
+      <SignalRManager />
+
+
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

@@ -4,13 +4,45 @@ using System;
 
 namespace msgHub
 {
-  class msgHub : Hub
+  class MsgHub : Hub
   {
-    public async Task NewMessage(long username, string message)
+
+      private readonly IMsgHubApplication _app;
+
+      public MsgHub(IMsgHubApplication app) => _app = app;
+
+    public async Task LogInUser(string username)
     {
-      Console.WriteLine(username.ToString(), message);
-      await Clients.All.SendAsync("messageReceived", username, message);
+      await Clients.Caller.SendAsync("userStatus", new { UserStatus = UserStatus.Pending, Request = "In Progress" });
+      try
+      {
+        await _app.LogInUser(username);
+        await Clients.Caller.SendAsync("userStatus", new { UserStatus = UserStatus.Online, Request = "Success" });
+      }
+      catch
+      {
+        await Clients.Caller.SendAsync("userStatus", new { UserStatus = UserStatus.Offline, Request = "Failed" });
+      }
     }
+    public async Task LogOutUser(string username)
+    {
+      await Clients.Caller.SendAsync("userStatus", new { UserStatus = UserStatus.Pending, Request = "In Progress" });
+      try
+      {
+        await _app.LogOutUser(username);
+        await Clients.Caller.SendAsync("userStatus", new { UserStatus = UserStatus.Offline, Request = "Success" });
+      }
+      catch
+      {
+        await Clients.Caller.SendAsync("userStatus", new { UserStatus = UserStatus.Online, Request = "Failed" });
+      }
+    }
+    public async Task GetWhiteBoard(string username)
+    {
+      var board = _app.GetWhiteBoard();
+        await Clients.Caller.SendAsync("getWhiteBoard", board);
+    }
+
   }
 
 }
