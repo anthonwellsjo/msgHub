@@ -93,11 +93,13 @@ namespace msgHub
       {
         Postits = new PostIt[]{
           post1,post2
-        }
-      };
+        },
+        CreatedBy = "Viktor Lyresten",
+        CreatedOn = new DateTime(2020, 09, 01, 10, 25, 05);
+    };
 
       return board;
     }
-  }
+}
 
 }

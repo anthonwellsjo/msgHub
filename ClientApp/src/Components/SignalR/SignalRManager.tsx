@@ -5,10 +5,10 @@ const SignalRManager: React.FC = () => {
 
   useEffect(() => {
 
-    fetch("get-whiteboard/1") 
-    .then((data)=>{
-      console.log(data);
-    })
+    fetch("/whiteboard")
+      .then(response => response.json())
+      .then(data => { console.log(data) })
+
 
     console.log("starting connection");
 

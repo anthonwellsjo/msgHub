@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace msgHub
 {
-  interface IMsgHubApplication
+  public interface IMsgHubApplication
   {
     Task LogInUser(string User);
     Task LogOutUser(string User);

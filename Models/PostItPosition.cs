@@ -1,7 +1,7 @@
 using System;
 namespace msgHub
 {
-  class PostItPosition
+  public class PostItPosition
   {
     public bool IsMoving { get; set; }
     public int X { get; set; }

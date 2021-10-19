@@ -1,7 +1,7 @@
 using System;
 namespace msgHub
 {
-  class PostIt
+  public class PostIt
   {
     public string ID{get;set;}
     public string Header{get;set;}

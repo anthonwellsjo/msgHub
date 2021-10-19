@@ -1,7 +1,7 @@
 using System;
 namespace msgHub
 {
-  class TextBlock
+  public class TextBlock
   {
         public string ID{get;set;}
         public string Text{get;set;}
