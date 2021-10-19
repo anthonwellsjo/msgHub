@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import * as signalR from '@microsoft/signalr';
+import { useAppDispatch } from '../../Utils/Redux/hooks';
+import { setHubConnectionId, setHubConnectionStatus } from '../../Utils/Redux/features/msgHub/hubConnectionSlice';
 
-const RTDataManager: React.FC = ({ children }) => {
+const SignalRManager: React.FC = ({ children }) => {
 
-  const [connection, setConnection] = useState<signalR.HubConnection>();
+  const [connection, setConnection] = useState<signalR.HubConnection | undefined>(undefined);
   const [connectionStarted, setConnectionStarted] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
-
-  useEffect(() => {
-
-    setConnection(new signalR.HubConnectionBuilder()
-      .withUrl("/hub")
-      .build())
-  }, []);
 
 
   useEffect(() => {
+    if (connection === undefined) {
+      setConnection(new signalR.HubConnectionBuilder()
+        .withUrl("/hub")
+        .build())
+    }
 
+    if (connection !== undefined) {
+    }
+  }, [connection, dispatch]);
+  
+  
+  useEffect(() => {
+    
     if (connection != null) {
       connection.start()
-        .then(() => {
+      .then(() => {
+          dispatch(setHubConnectionId(connection.connectionId));
+          dispatch(setHubConnectionStatus("open"));
           setConnectionStarted(true);
           console.log("connection open", connection);
           connection.send("logInUser", "anthon");
@@ -49,4 +59,4 @@ const RTDataManager: React.FC = ({ children }) => {
   } else return null;
 }
 
-export default RTDataManager;
+export default SignalRManager;

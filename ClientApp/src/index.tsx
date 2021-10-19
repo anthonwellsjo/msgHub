@@ -3,19 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import LoginManager from './Components/Auth/LoginManager';
-import RTDataManager from './Components/SignalR/RTDataManager';
+import SignalRManager from './Components/SignalR/SignalRManager';
 import { Provider } from 'react-redux';
-import { store } from './Components/Utils/Redux/store';
+import { store } from './Utils/Redux/store';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RTDataManager>
-        <LoginManager>
-          <App />
-        </LoginManager>
-      </RTDataManager>
+      <SignalRManager />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
