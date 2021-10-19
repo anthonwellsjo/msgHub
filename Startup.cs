@@ -26,7 +26,7 @@ namespace msgHub
       services.AddControllers();
       services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "msgHubApi", Version = "v1" });
+              c.SwaggerDoc("v1", new OpenApiInfo { Title = "msgHubApi", Version = "v1" });
             });
       services.AddSignalR();
 
@@ -62,7 +62,9 @@ namespace msgHub
 
       app.UseEndpoints(endpoints =>
       {
-        endpoints.MapControllers();
+        endpoints.MapControllerRoute(
+          name: "default",
+          pattern: "{controller=Home}/{action=Index}/{id?}");
         endpoints.MapHub<MsgHub>("/hub");
       });
       app.UseSpa(spa =>

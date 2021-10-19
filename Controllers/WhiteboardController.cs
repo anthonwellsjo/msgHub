@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR;
+
 using System;
 
 namespace msgHub.Controllers
@@ -9,18 +10,20 @@ namespace msgHub.Controllers
   [Route("[controller]")]
   public class WhiteboardController : Controller
   {
-    private readonly IMsgHubApplication _app;
+    private readonly IMsgHubApplication _appContext;
 
-    public WhiteboardController(IMsgHubApplication app) => _app = app;
+    public WhiteboardController(IMsgHubApplication appContext, IHubContext<MsgHub> hubcontext)
+    {
+      _appContext = appContext;
+    }
 
     [HttpGet]
-    public ActionResult<Whiteboard> Get(string id)
+    public async Task<Whiteboard> Get(string id)
     {
-      var board = _app.GetWhiteBoard();
+      var board = await _appContext.GetWhiteBoard();
       Console.WriteLine(id);
       return board;
     }
-
 
   }
 }

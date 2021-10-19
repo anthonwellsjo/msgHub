@@ -1,28 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './Public/ymca_logo.png';
 import './App.css';
-import SignalRManager from './Components/SignalR/SignalRManager';
+import RTDataManager from './Components/SignalR/RTDataManager';
 
 function App() {
   return (
-    <div className="App">
-      <SignalRManager />
-
-
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{
+      height: "100vh",
+      width: "100vw",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+      <div style={{
+        position: "absolute",
+        left: 0,
+        top: 0
+      }}>
+        <img width={100} src={logo} alt="logo" />
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <input type="text" />
+        <button>Let me in!</button>
+      </div>
     </div>
   );
 }

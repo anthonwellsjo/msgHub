@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import LoginManager from './Components/Auth/LoginManager';
+import RTDataManager from './Components/SignalR/RTDataManager';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RTDataManager>
+      <LoginManager>
+        <App />
+      </LoginManager>
+    </RTDataManager>
   </React.StrictMode>,
   document.getElementById('root')
 );

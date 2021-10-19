@@ -6,23 +6,20 @@ namespace msgHub
 {
   class TempDataApp : IMsgHubApplication
   {
-    public Task LogInUser(string User)
+    public async Task LogInUser(string User)
     {
-      return Task.Factory.StartNew(() =>
-      {
-        return UserStatus.Online;
-      });
+      await Task.Delay(500);
+      return;
     }
-    public Task LogOutUser(string User)
+    public async Task LogOutUser(string User)
     {
-      return Task.Factory.StartNew(() =>
-       {
-         return UserStatus.Offline;
-       });
+      await Task.Delay(500);
+      return;
+    }
+    public async Task<Whiteboard> GetWhiteBoard()
+    {
+      await Task.Delay(500);
 
-    }
-    public Whiteboard GetWhiteBoard()
-    {
       var post1 = new PostIt()
       {
         ID = Guid.NewGuid().ToString(),
@@ -96,10 +93,10 @@ namespace msgHub
         },
         CreatedBy = "Lyret",
         CreatedOn = new DateTime(2020, 09, 01, 10, 25, 05)
-    };
+      };
 
       return board;
     }
-}
+  }
 
 }

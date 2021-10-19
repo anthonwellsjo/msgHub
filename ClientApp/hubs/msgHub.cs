@@ -4,7 +4,7 @@ using System;
 
 namespace msgHub
 {
-  class MsgHub : Hub
+  public class MsgHub : Hub
   {
 
       private readonly IMsgHubApplication _app;
