@@ -19,13 +19,13 @@ namespace msgHub.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(string username, string RoomName, string connectionId)
+    public async Task<IActionResult> Login(string username, string whiteBoardName, string connectionId)
     {
       try
       {
         await _appContext.LogInUser(username);
-        await _hubContext.Groups.AddToGroupAsync(connectionId, RoomName);
-        await _hubContext.Clients.Group(RoomName).SendAsync("groupNotification", username + " just joined!");
+        await _hubContext.Groups.AddToGroupAsync(connectionId, whiteBoardName);
+        await _hubContext.Clients.Group(whiteBoardName).SendAsync("groupNotification", username + " just joined!");
         return Ok();
       }
       catch
@@ -35,13 +35,13 @@ namespace msgHub.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> Logout(string username, string RoomName, string connectionId)
+    public async Task<IActionResult> Logout(string username, string whiteBoardName, string connectionId)
     {
       try
       {
         await _appContext.LogOutUser(username);
-        await _hubContext.Groups.AddToGroupAsync(connectionId, RoomName);
-        await _hubContext.Clients.Group(RoomName).SendAsync("groupNotification", username + " just left...");
+        await _hubContext.Groups.AddToGroupAsync(connectionId, whiteBoardName);
+        await _hubContext.Clients.Group(whiteBoardName).SendAsync("groupNotification", username + " just left...");
         return Ok();
       }
       catch

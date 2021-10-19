@@ -1,9 +1,9 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import smarthutReducer from './features/smartHut/smartHutSlice';
+import userStatusReducer from './features/msgHub/userSlice';
 
 export const store = configureStore({
   reducer: {
-    smarthut: smarthutReducer,
+    msgHub: userStatusReducer,
   },
 });
 

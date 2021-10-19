@@ -5,14 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import LoginManager from './Components/Auth/LoginManager';
 import RTDataManager from './Components/SignalR/RTDataManager';
+import { Provider } from 'react-redux';
+import { store } from './Components/Utils/Redux/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <RTDataManager>
-      <LoginManager>
-        <App />
-      </LoginManager>
-    </RTDataManager>
+    <Provider store={store}>
+      <RTDataManager>
+        <LoginManager>
+          <App />
+        </LoginManager>
+      </RTDataManager>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
