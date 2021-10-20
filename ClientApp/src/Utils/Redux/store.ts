@@ -1,10 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import userStatusReducer from './features/msgHub/userSlice';
-import hubConnectionReducer from './features/msgHub/hubConnectionSlice';
+import whiteboardReducer from './features/msgHub/whiteboardSlice';
 
 export const store = configureStore({
   reducer: {
-    userStatusReducer, hubConnectionReducer
+    userStatusReducer, whiteboardReducer
   },
 });
 

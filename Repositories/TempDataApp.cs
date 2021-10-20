@@ -47,11 +47,12 @@ namespace msgHub
         Position = new PostItPosition()
         {
           IsMoving = false,
-          X = 255,
-          Y = 200
+          X = 355,
+          Y = 400
         },
         CreatedBy = "John",
-        CreatedOn = new DateTime(2020, 09, 28, 16, 05, 25)
+        CreatedOn = new DateTime(2020, 09, 28, 16, 05, 25),
+
       };
 
 
@@ -92,7 +93,8 @@ namespace msgHub
           post1,post2
         },
         CreatedBy = "Lyret",
-        CreatedOn = new DateTime(2020, 09, 01, 10, 25, 05)
+        CreatedOn = new DateTime(2020, 09, 01, 10, 25, 05),
+        Id = Guid.NewGuid().ToString(),
       };
 
       return board;

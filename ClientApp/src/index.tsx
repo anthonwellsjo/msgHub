@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import SignalRManager from './Components/SignalR/SignalRManager';
 import { Provider } from 'react-redux';
 import { store } from './Utils/Redux/store';
-import { HubConnectionProvider } from './Components/Context/HubConnectionContext';
+import { HubConnectionProvider } from './Utils/Context/HubConnectionContext';
 
 ReactDOM.render(
   <React.StrictMode>

@@ -7,9 +7,9 @@ namespace msgHub
   public class MsgHub : Hub
   {
 
-      private readonly IMsgHubApplication _app;
+    private readonly IMsgHubApplication _app;
 
-      public MsgHub(IMsgHubApplication app) => _app = app;
+    public MsgHub(IMsgHubApplication app) => _app = app;
 
     public async Task LogInUser(string username)
     {
@@ -24,23 +24,10 @@ namespace msgHub
         await Clients.Caller.SendAsync("userStatus", new { UserStatus = UserStatus.Offline, Request = "Failed" });
       }
     }
-    public async Task LogOutUser(string username)
+    public async Task MovePostIt(MovePostItPayload payload, string groupName)
     {
-      await Clients.Caller.SendAsync("userStatus", new { UserStatus = UserStatus.Pending, Request = "In Progress" });
-      try
-      {
-        await _app.LogOutUser(username);
-        await Clients.Caller.SendAsync("userStatus", new { UserStatus = UserStatus.Offline, Request = "Success" });
-      }
-      catch
-      {
-        await Clients.Caller.SendAsync("userStatus", new { UserStatus = UserStatus.Online, Request = "Failed" });
-      }
-    }
-    public async Task GetWhiteBoard(string username)
-    {
-      var board = _app.GetWhiteBoard();
-        await Clients.Caller.SendAsync("getWhiteBoard", board);
+      await Clients.Group(groupName).SendAsync("movePostIt", payload);
+      
     }
 
   }
