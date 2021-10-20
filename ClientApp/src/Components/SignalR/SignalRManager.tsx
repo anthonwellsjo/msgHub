@@ -1,46 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as signalR from '@microsoft/signalr';
 import { useAppDispatch } from '../../Utils/Redux/hooks';
 import { setHubConnectionId, setHubConnectionStatus } from '../../Utils/Redux/features/msgHub/hubConnectionSlice';
+import { HubConnectionContext } from '../Context/HubConnectionContext';
 
 const SignalRManager: React.FC = ({ children }) => {
-
-  const [connection, setConnection] = useState<signalR.HubConnection | undefined>(undefined);
-  const [connectionStarted, setConnectionStarted] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const [hubConnection, setHubConnection] = useContext<any>(HubConnectionContext);
 
 
 
   useEffect(() => {
-    if (connection === undefined) {
-      setConnection(new signalR.HubConnectionBuilder()
+    if (hubConnection === undefined) {
+
+      setHubConnection(new signalR.HubConnectionBuilder()
         .withUrl("/hub")
         .build())
     }
 
-    if (connection !== undefined) {
-    }
-  }, [connection, dispatch]);
-  
-  
+  }, [hubConnection, dispatch]);
+
+
   useEffect(() => {
-    
-    if (connection != null) {
-      connection.start()
-      .then(() => {
-          dispatch(setHubConnectionId(connection.connectionId));
+
+    if (hubConnection != null) {
+      hubConnection.start()
+        .then(() => {
+          dispatch(setHubConnectionId(hubConnection.connectionId));
           dispatch(setHubConnectionStatus("open"));
           setConnectionStarted(true);
-          console.log("connection open", connection);
-          connection.send("logInUser", "anthon");
-          connection.on("userStatus", (status) => {
+          console.log("hubConnection open", hubConnection);
+          hubConnection.send("logInUser", "anthon");
+          hubConnection.on("userStatus", (status) => {
             console.log("User status", status);
           });
-          connection.on("groupNotification", (status) => {
+          hubConnection.on("groupNotification", (status) => {
             console.log("MEssage", status);
           });
           setTimeout(() => {
-            connection.send("logOutUser", "anthon");
+            hubConnection.send("logOutUser", "anthon");
           }, 2000);
         })
         .catch((error) => { throw error; })

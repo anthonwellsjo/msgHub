@@ -6,12 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import SignalRManager from './Components/SignalR/SignalRManager';
 import { Provider } from 'react-redux';
 import { store } from './Utils/Redux/store';
+import { HubConnectionProvider } from './Components/Context/HubConnectionContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <SignalRManager />
-      <App />
+      <HubConnectionProvider>
+        <SignalRManager />
+        <App />
+      </HubConnectionProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
