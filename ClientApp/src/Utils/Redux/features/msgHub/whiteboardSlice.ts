@@ -1,5 +1,6 @@
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { MovePostItPayload } from '../../../../Types/movePostItPayload';
 import { Whiteboard } from '../../../../Types/whiteboard';
 import { getWhiteboard } from '../../../api';
 
@@ -46,9 +47,9 @@ export const whiteboardState = createSlice({
     logOutUser: (state, action) => {
       state.usersLoggedIn.splice(state.usersLoggedIn.findIndex(t => t === action.payload), 1);
     },
-    setPostItPosition: (state, action: PayloadAction<{ postItid: string, x: number, y: number }>) => {
+    setPostItPosition: (state, action: PayloadAction<MovePostItPayload>) => {
       if (state.whiteboard !== undefined) {
-        const index = state.whiteboard.postits.findIndex(p => p.id === action.payload.postItid);
+        const index = state.whiteboard.postits.findIndex(p => p.id === action.payload.postItId);
         if (index != null) {
           state.whiteboard.postits[index].position.x = action.payload.x;
           state.whiteboard.postits[index].position.y = action.payload.y;

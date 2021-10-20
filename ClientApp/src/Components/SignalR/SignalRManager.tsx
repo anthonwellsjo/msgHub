@@ -6,6 +6,7 @@ import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { useSelector } from 'react-redux';
 import { GroupNotificationPayload } from '../../Types/groupNotification';
 import { MovePostItPayload } from '../../Types/movePostItPayload';
+import { setPostItPosition } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
 
 const SignalRManager: React.FC = ({ children }) => {
   const dispatch = useAppDispatch();
@@ -27,18 +28,16 @@ const SignalRManager: React.FC = ({ children }) => {
       hubConnection.start()
         .then(() => {
           hubConnection.on("groupNotification", (payload: GroupNotificationPayload) => {
-            console.log(payload.message);
           });
 
           hubConnection.on("movePostIt", (payload: MovePostItPayload) => {
-            console.log(payload.x);
-            dispatch(set)
+            dispatch(setPostItPosition(payload))
           });
         })
         .catch((error: any) => { throw error; })
     }
 
-  }, [hubConnection])
+  }, [hubConnection, dispatch])
 
 
   if ((hubConnection as signalR.HubConnection).state === signalR.HubConnectionState.Connected) {
