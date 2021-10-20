@@ -26,9 +26,7 @@ namespace msgHub
     }
     public async Task MovePostIt(MovePostItPayload payload, string groupName)
     {
-      Console.WriteLine("sending thing " +groupName);
       await Clients.Group(groupName).SendAsync("movePostIt", payload);
-      
     }
 
   }

@@ -4,12 +4,13 @@ import { useAppDispatch } from '../../Utils/Redux/hooks';
 
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { useSelector } from 'react-redux';
-import { GroupNotificationPayload } from '../../Types/groupNotificationPayload';
 import { MovePostItPayload } from '../../Types/movePostItPayload';
 import { setPostItPosition, setUsersLoggedIn } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
 import { AlertContext } from '../../Utils/Context/alertContext';
 import { AlertItem } from '../../Types/alertItem';
 import { GetAlertColor } from '../../Utils/Utils';
+import { UserLoggedInPayload } from '../../Types/userLoggedInPayload';
+import { AlertType } from '../../Types/alertType';
 
 const SignalRManager: React.FC = ({ children }) => {
   const dispatch = useAppDispatch();
@@ -32,10 +33,10 @@ const SignalRManager: React.FC = ({ children }) => {
     if (hubConnection != null && (hubConnection as signalR.HubConnection).state === signalR.HubConnectionState.Disconnected) {
       hubConnection.start()
         .then(() => {
-          hubConnection.on("groupNotification", (payload: GroupNotificationPayload) => {
-            const alertItem: AlertItem = { text: `${payload.message}!`, color: GetAlertColor(payload.alertType) }
+          hubConnection.on("userLoggedIn", (payload: UserLoggedInPayload) => {
+            const alertItem: AlertItem = { text: `${payload.userName} just logged in.`, color: GetAlertColor(AlertType.primary) }
             setAlerts((prev: AlertItem[]) => [...prev, alertItem]);
-            dispatch(setUsersLoggedIn(payload.message));
+            dispatch(setUsersLoggedIn(payload.userName));
           });
 
           hubConnection.on("movePostIt", (payload: MovePostItPayload) => {

@@ -1,4 +1,5 @@
-import { AlertType } from "../Types/groupNotificationPayload";
+import { AlertType } from "../Types/alertType";
+
 
 export const whiteBoardName = "redrum";
 
