@@ -47,6 +47,9 @@ export const whiteboardState = createSlice({
     logOutUser: (state, action) => {
       state.usersLoggedIn.splice(state.usersLoggedIn.findIndex(t => t === action.payload), 1);
     },
+    setUsersLoggedIn: (state, action) => {
+      state.usersLoggedIn.push(action.payload);
+    },
     setPostItPosition: (state, action: PayloadAction<MovePostItPayload>) => {
       if (state.whiteboard !== undefined) {
         const index = state.whiteboard.postits.findIndex(p => p.id === action.payload.postItId);
@@ -86,7 +89,7 @@ export const whiteboardState = createSlice({
   }
 });
 
-export const { setWhiteboard, setPostItPosition, setPostItIsMoving, logInUser, logOutUser } = whiteboardState.actions;
+export const { setWhiteboard, setUsersLoggedIn, setPostItPosition, setPostItIsMoving, logInUser, logOutUser } = whiteboardState.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

@@ -1,3 +1,5 @@
+import { AlertType } from "../Types/groupNotificationPayload";
+
 export const whiteBoardName = "redrum";
 
 const names = [
@@ -7,4 +9,18 @@ const names = [
 export const randomName = () => {
 
   return names[Math.floor(Math.random() * names.length)];
+}
+
+export const GetAlertColor = (type: AlertType) => {
+  switch (type) {
+    case AlertType.primary: {
+      return "lightgreen"
+    }
+    case AlertType.danger: {
+      return "lightred"
+    }
+    case AlertType.warning: {
+      return "orange"
+    }
+  }
 }

@@ -94,7 +94,7 @@ const PostItUI: React.FC<PostIt> = (props) => {
         alignItems:"center",
         flexDirection:"column",
       }}>
-      <h4 style={{ fontFamily: "Rasa"}}>{props.header}</h4>
+      <h4 >{props.header}</h4>
       <p>{props.id}</p>
     </div>
   )

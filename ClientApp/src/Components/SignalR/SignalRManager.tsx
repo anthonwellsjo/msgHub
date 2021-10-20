@@ -4,13 +4,18 @@ import { useAppDispatch } from '../../Utils/Redux/hooks';
 
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { useSelector } from 'react-redux';
-import { GroupNotificationPayload } from '../../Types/groupNotification';
+import { GroupNotificationPayload } from '../../Types/groupNotificationPayload';
 import { MovePostItPayload } from '../../Types/movePostItPayload';
-import { setPostItPosition } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
+import { setPostItPosition, setUsersLoggedIn } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
+import { AlertContext } from '../../Utils/Context/alertContext';
+import { AlertItem } from '../../Types/alertItem';
+import { GetAlertColor } from '../../Utils/Utils';
 
 const SignalRManager: React.FC = ({ children }) => {
   const dispatch = useAppDispatch();
   const [hubConnection, setHubConnection] = useContext<any>(HubConnectionContext);
+  const [alerts, setAlerts] = useContext(AlertContext);
+
 
 
   useEffect(() => {
@@ -28,6 +33,9 @@ const SignalRManager: React.FC = ({ children }) => {
       hubConnection.start()
         .then(() => {
           hubConnection.on("groupNotification", (payload: GroupNotificationPayload) => {
+            const alertItem: AlertItem = { text: `${payload.message}!`, color: GetAlertColor(payload.alertType) }
+            setAlerts((prev: AlertItem[]) => [...prev, alertItem]);
+            dispatch(setUsersLoggedIn(payload.message));
           });
 
           hubConnection.on("movePostIt", (payload: MovePostItPayload) => {

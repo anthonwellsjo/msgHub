@@ -7,14 +7,18 @@ import SignalRManager from './Components/SignalR/SignalRManager';
 import { Provider } from 'react-redux';
 import { store } from './Utils/Redux/store';
 import { HubConnectionProvider } from './Utils/Context/HubConnectionContext';
+import { AlertProvider } from './Utils/Context/alertContext';
+
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <HubConnectionProvider>
-        <SignalRManager />
-        <App />
-      </HubConnectionProvider>
+      <AlertProvider>
+        <HubConnectionProvider>
+          <SignalRManager />
+          <App />
+        </HubConnectionProvider>
+      </AlertProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

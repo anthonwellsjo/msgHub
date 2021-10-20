@@ -1,7 +1,10 @@
 import React, { useContext, useState } from 'react';
+import { AlertItem } from '../../Types/alertItem';
 import { loginUser } from '../../Utils/api';
+import { AlertContext } from '../../Utils/Context/alertContext';
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { setUserName, setUserStatus } from '../../Utils/Redux/features/msgHub/userSlice';
+import { setUsersLoggedIn } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
 import { useAppDispatch, useAppSelector } from '../../Utils/Redux/hooks';
 import { randomName, whiteBoardName } from '../../Utils/Utils';
 
@@ -12,7 +15,9 @@ const Login: React.FC = () => {
   const [hubConnection, setHubConnection] = useContext<any>(HubConnectionContext);
   const dispatch = useAppDispatch();
 
+
   const onLoginEventHandler = () => {
+
     if (name.length < 1) {
       setName(randomName());
       return;
