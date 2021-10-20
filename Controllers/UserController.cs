@@ -25,6 +25,7 @@ namespace msgHub.Controllers
       try
       {
         await _appContext.LogInUser(username);
+        Console.WriteLine(username + whiteBoardName + connectionId);
         await _hubContext.Groups.AddToGroupAsync(connectionId, whiteBoardName);
         var message = new GroupNotificationPayload { Message = username + " just joined!" };
         Console.WriteLine(message.Message);

@@ -22,11 +22,11 @@ namespace msgHub
 
       var post1 = new PostIt()
       {
-        ID = Guid.NewGuid().ToString(),
+        ID = "post1",
         Header = "Dirty sheets in room 12!",
         Body = new TextBlock[]{
           new TextBlock(){
-            ID = Guid.NewGuid().ToString(),
+            ID = "post1block1",
             Author = "John",
             Text = "I couldn't change them yesterday because something...",
             Formatting = new Format[] {
@@ -35,7 +35,7 @@ namespace msgHub
             LastUpdated= new DateTime(2020,09,28,16,05,25),
           },
           new TextBlock(){
-            ID = Guid.NewGuid().ToString(),
+            ID = "post1block2",
             Author = "Teresa",
             Text = "Ok done!",
             Formatting = new Format[] {
@@ -58,11 +58,11 @@ namespace msgHub
 
       var post2 = new PostIt()
       {
-        ID = Guid.NewGuid().ToString(),
+        ID = "post2",
         Header = "Monkey loose!",
         Body = new TextBlock[]{
           new TextBlock(){
-            ID = Guid.NewGuid().ToString(),
+            ID = "post2block1",
             Author = "Liza",
             Text = "It's in the kitchen eating bananas.",
             Formatting = new Format[] {
@@ -71,7 +71,7 @@ namespace msgHub
             LastUpdated= new DateTime(2020,09,28,10,15,45),
           },
           new TextBlock(){
-            ID = Guid.NewGuid().ToString(),
+            ID = "post2block2",
             Author = "Tom",
             Text = "That's weird. I closed him in his cage yesterday night.",
             LastUpdated= new DateTime(2020,09,28,18,05,25),
