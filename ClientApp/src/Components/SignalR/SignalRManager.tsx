@@ -32,6 +32,7 @@ const SignalRManager: React.FC = ({ children }) => {
 
           hubConnection.on("movePostIt", (payload: MovePostItPayload) => {
             console.log(payload.x);
+            dispatch(set)
           });
         })
         .catch((error: any) => { throw error; })

@@ -3,6 +3,7 @@ import { PostIt } from '../../Types/postIt';
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import * as signalR from '@microsoft/signalr';
 import { MovePostItPayload } from '../../Types/movePostItPayload';
+import { whiteBoardName } from '../../Utils/Utils';
 
 
 
@@ -12,7 +13,7 @@ const PostItUI: React.FC<PostIt> = (props) => {
   const onDragEventHander = () => {
     console.log("sending");
     const payload: MovePostItPayload = { x: 2, y: 2, postItId: props.id };
-    (hubConnection as signalR.HubConnection).send("movePostIt", payload);
+    (hubConnection as signalR.HubConnection).send("movePostIt", payload, whiteBoardName);
   }
 
 
@@ -20,9 +21,9 @@ const PostItUI: React.FC<PostIt> = (props) => {
   return (
     <div
       draggable
-      onTouchMove={onDragEventHander}
+      onTouchMove={() => console.log("onTouchMoveEMove")}
       onTouchEnd={() => console.log("onTouchMoveEnd")}
-      onTouchStart={() => console.log("onTouchMoveStart")}
+      onTouchStart={onDragEventHander}
       onDrag={() => console.log("drag")}
       onDragEnter={() => console.log("drag enter")}
       onDragExit={() => console.log("drag exit")}
