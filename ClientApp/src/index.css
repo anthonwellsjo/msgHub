@@ -18,6 +18,9 @@ code {
     monospace;
 }
 
-p {
+p,
+textarea,
+input {
   font-family: Rasa;
+  font-size: 0.9em;
 }

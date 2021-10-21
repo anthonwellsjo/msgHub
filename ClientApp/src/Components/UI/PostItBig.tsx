@@ -23,7 +23,7 @@ const PostItBig: React.FC<props> = (props) => {
   const [showLoaderIfThisNumberIsSameAsNumberOfPostIts, setshowLoaderIfThisNumberIsSameAsNumberOfPostIts] = useState<number | undefined>(undefined);
   const [hubConnection] = useContext(HubConnectionContext);
   const user = useAppSelector(selectUserName);
-  const bcgColor = useMemo(()=>GetRandomColor(props.PostIt.body.length),[])
+
 
   const onNewTextBlockClickEventHandler = () => {
     if (user) {
@@ -52,16 +52,19 @@ const PostItBig: React.FC<props> = (props) => {
   const stopEditingTextBlock = () => {
     if (editBlock !== undefined) {
       const block = props.PostIt.body[editBlock];
-      if (block.text.length > 0) {
-        setEditBlock(undefined);
-        setshowLoaderIfThisNumberIsSameAsNumberOfPostIts(undefined);
-      } else {
-        console.log("deleting");
-        const payload: DeleteTextBlockFromClient = { postItId: props.PostIt.id, textBlockId: block.id };
-        (hubConnection as signalR.HubConnection).send("deleteTextBlock", payload, whiteBoardName);
-        setEditBlock(undefined);
-        setshowLoaderIfThisNumberIsSameAsNumberOfPostIts(undefined);
+
+      if (block.text.length !== undefined) {
+        if (block.text.length > 0) {
+          setEditBlock(undefined);
+          setshowLoaderIfThisNumberIsSameAsNumberOfPostIts(undefined);
+          return;
+        }
       }
+      console.log("deleting");
+      const payload: DeleteTextBlockFromClient = { postItId: props.PostIt.id, textBlockId: block.id };
+      (hubConnection as signalR.HubConnection).send("deleteTextBlock", payload, whiteBoardName);
+      setEditBlock(undefined);
+      setshowLoaderIfThisNumberIsSameAsNumberOfPostIts(undefined);
     }
   }
 
@@ -96,13 +99,13 @@ const PostItBig: React.FC<props> = (props) => {
           borderRadius: "2px",
           width: "492px",
           height: "564px",
-          padding: "0px 40px 40px 0",
+          padding: "0px 0 40px 0",
           boxSizing: "border-box",
           position: "relative",
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
-          overflowY:"scroll"
+          overflowY: "scroll"
         }}>
         <header>
           <h3 style={{ fontFamily: "handwriting", fontSize: "2em", textAlign: "center" }}>{props.PostIt.header}</h3>
@@ -116,12 +119,14 @@ const PostItBig: React.FC<props> = (props) => {
               onUserEditClicked={startEditingTextBlock}
               key={b.id}
               block={b}
-              color={a.length > 1 ? GetRandomColor(i) : undefined} />))}
-          <AddTextBlockButton onClick={onNewTextBlockClickEventHandler} color={bcgColor} >
-            {showLoaderIfThisNumberIsSameAsNumberOfPostIts !== undefined && showLoaderIfThisNumberIsSameAsNumberOfPostIts === props.PostIt.body.length ?
-              <Loader /> :
-              <PlusButton />}
-          </AddTextBlockButton>
+              index={i} />))}
+          {editBlock === undefined &&
+            <AddTextBlockButton onClick={onNewTextBlockClickEventHandler} color={"lightgrey"} >
+              {showLoaderIfThisNumberIsSameAsNumberOfPostIts !== undefined && showLoaderIfThisNumberIsSameAsNumberOfPostIts === props.PostIt.body.length ?
+                <Loader /> :
+                <PlusButton />}
+            </AddTextBlockButton>
+          }
         </main>
       </div>
     </div >

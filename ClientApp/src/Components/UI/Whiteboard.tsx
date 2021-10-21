@@ -12,7 +12,7 @@ const Whiteboard: React.FC = () => {
   const postit = whiteboard?.postits.find(p => p.id === openPostItId);
   const postItMoving = whiteboard?.postits.find(p => p.position.isMoving);
   return (
-    <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       {whiteboard?.postits.map(p => {
         if (openPostItId !== p.id) {
           return (

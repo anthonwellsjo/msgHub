@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../../Public/ymca_logo.png';
+import NewPostIt from './NewPostIt';
 
 
 const Header: React.FC = () => {
@@ -16,6 +17,7 @@ const Header: React.FC = () => {
       justifyContent: "space-between"
     }}>
       <img style={{ marginTop: "10px" }} width={100} src={logo} alt="logo" />
+      <NewPostIt/>
     </div>
   )
 }

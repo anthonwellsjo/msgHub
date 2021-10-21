@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { createRef, useEffect, useMemo } from 'react';
 import { TextBlock } from '../../Types/textBlock';
+import { GetRandomColor } from '../../Utils/Utils';
 import EditTextBlockButton from './EditTextBlockButton';
 
 interface props {
   block: TextBlock,
-  color?: string,
+  index: number,
   userEditing?: boolean,
   onChangeEventHandler: (value: string, blockId: string) => void,
   editable: boolean,
   onUserEditClicked: (textBlockId: string) => void
 }
 
-const PostItTextBlock: React.FC<props> = ({ block, color, userEditing = false, onChangeEventHandler, editable, onUserEditClicked }) => {
+const PostItTextBlock: React.FC<props> = ({ block, index, userEditing = false, onChangeEventHandler, editable, onUserEditClicked }) => {
+  const bcgColor = useMemo(() => GetRandomColor(index), [])
+  console.log("is editable", editable, userEditing);
+  let inputRef = createRef<HTMLTextAreaElement>();
+
+  useEffect(() => {
+    if (userEditing) {
+      inputRef?.current?.focus();
+    }
+  }, [inputRef, userEditing])
 
   return (
     <div
@@ -22,15 +32,16 @@ const PostItTextBlock: React.FC<props> = ({ block, color, userEditing = false, o
         display: "flex",
         flexDirection: "column",
         width: "100%",
-        maxWidth: "100%",
         marginBottom: "5px",
-        overflow:"hidden",
-        borderRadius:"3px"
+        overflow: "hidden",
+        height: userEditing ? "100px" : "auto",
+        boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.25)",
+        borderRadius: "2px"
       }}>
       <div style={{
-        backgroundColor: userEditing ? "white" : color, width: "100%", height: "100%",
+        backgroundColor: userEditing ? "white" : bcgColor, width: "100%", height: "100%",
         boxSizing: "border-box",
-        
+
         padding: "20px 10px",
       }}>
         <main style={{ marginTop: "-20px", display: "flex", flexDirection: "column", justifyContent: "center", }}>
@@ -39,13 +50,14 @@ const PostItTextBlock: React.FC<props> = ({ block, color, userEditing = false, o
               onClick={() => { onUserEditClicked(block.id) }}
               style={{
                 position: "absolute",
-                right: "-25px",
+                right: "5px",
+                top: "5px",
                 cursor: "pointer"
               }}>
               <EditTextBlockButton />
             </div>}
           {userEditing ?
-            <textarea style={{
+            <textarea ref={inputRef} style={{
               outline: "none",
               resize: "none",
               border: "none",
