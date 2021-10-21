@@ -5,14 +5,17 @@ import { useAppDispatch } from '../../Utils/Redux/hooks';
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { useSelector } from 'react-redux';
 import { MovePostItPayload } from '../../Types/movePostItPayload';
-import { editTextBlockText, setNewTextBlock, setPostItPosition, setUsersLoggedIn } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
+import { deleteTextBlock, editTextBlockText, setNewTextBlock, setPostItIsMoving, setPostItPosition, setUsersLoggedIn, trashPostIt } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
 import { AlertContext } from '../../Utils/Context/alertContext';
 import { AlertItem } from '../../Types/alertItem';
 import { GetAlertColor } from '../../Utils/Utils';
 import { UserLoggedInPayload } from '../../Types/userLoggedInPayload';
 import { AlertType } from '../../Types/alertType';
 import { NewBlockTextPayloadFromServer } from '../../Types/newBlockTextPayload';
-import { EditTextBlockTex } from '../../Types/editTextBlockText';
+import { EditTextBlockTextFromServer } from '../../Types/editTextBlockText';
+import { DeleteTextBlockFromServer } from '../../Types/deleteTextBlock';
+import { IsPostItMovingFromServer } from '../../Types/isPostItMoving';
+import { TrashPostItFromServer } from '../../Types/trashPostIt';
 
 const SignalRManager: React.FC = ({ children }) => {
   const dispatch = useAppDispatch();
@@ -54,9 +57,25 @@ const SignalRManager: React.FC = ({ children }) => {
           });
 
 
-          hubConnection.on("editTextBlockText", (payload: EditTextBlockTex) => {
+          hubConnection.on("editTextBlockText", (payload: EditTextBlockTextFromServer) => {
             console.log(payload);
             dispatch(editTextBlockText(payload));
+          });
+
+
+          hubConnection.on("isPostItMoving", (payload: IsPostItMovingFromServer) => {
+            console.log(payload);
+            dispatch(setPostItIsMoving(payload));
+          });
+
+          hubConnection.on("trashPostIt", (payload: TrashPostItFromServer) => {
+            console.log(payload);
+            dispatch(trashPostIt(payload));
+          });
+
+          hubConnection.on("deleteTextBlockFromClient", (payload: DeleteTextBlockFromServer) => {
+            console.log(payload);
+            dispatch(deleteTextBlock(payload));
           });
         })
         .catch((error: any) => { throw error; })

@@ -29,11 +29,23 @@ namespace msgHub
       await Clients.Group(groupName).SendAsync("movePostIt", payload);
     }
 
-    public async Task editTextBlockText(editTextBlockTextFromClient payload, string groupName)
+    public async Task EditTextBlockText(EditTextBlockTextFromClient payload, string groupName)
     {
       await Clients.Group(groupName).SendAsync("editTextBlockText", payload);
     }
-
+    public async Task DeleteTextBlock(DeleteTextBlockFromClient payload, string groupName)
+    {
+      await Clients.Group(groupName).SendAsync("deleteTextBlockFromClient", payload);
+    }
+    public async Task IsPostItMoving(IsPostItMovingFromClient payload, string groupName)
+    {
+      var data = new IsPostItMovingFromServer(payload);
+      await Clients.Group(groupName).SendAsync("isPostItMoving", data);
+    }
+    public async Task TrashPostIt(TrashPostItFromClient payload, string groupName)
+    {
+      var data = new TrashPostItFromServer(payload);
+      await Clients.Group(groupName).SendAsync("trashPostIt", data);
+    }
   }
-
 }

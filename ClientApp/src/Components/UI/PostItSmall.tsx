@@ -3,7 +3,10 @@ import { PostIt } from '../../Types/postIt';
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import * as signalR from '@microsoft/signalr';
 import { MovePostItPayload } from '../../Types/movePostItPayload';
+import { useAppDispatch } from '../../Utils/Redux/hooks';
 import { whiteBoardName } from '../../Utils/Utils';
+import { IsPostItMovingFromClient } from '../../Types/isPostItMoving';
+
 
 interface props {
   PostIt: PostIt,
@@ -11,15 +14,15 @@ interface props {
 }
 
 const PostItSmall: React.FC<props> = (props) => {
-  const [isDragging, setIsDragging] = useState(false);
+  const isDragging = props.PostIt.position.isMoving;
   const [timer, setTimer] = useState(Date.now());
   const [offset, setOffset] = useState([0, 0]);
   const [hubConnection] = useContext<any>(HubConnectionContext);
 
-
   const isDraggingRef = useRef(isDragging);
   const setIsDraggingExpanded = (value: boolean) => {
-    setIsDragging(value);
+    const payload: IsPostItMovingFromClient = { value: value, postItId: props.PostIt.id };
+    (hubConnection as signalR.HubConnection).send("isPostItMoving", payload, whiteBoardName);
     isDraggingRef.current = value;
   }
 
@@ -59,6 +62,8 @@ const PostItSmall: React.FC<props> = (props) => {
     if (isDbClick === false) {
       setOffsetExpanded([e.nativeEvent.offsetX, e.nativeEvent.offsetY])
       setIsDraggingExpanded(true);
+
+
     }
 
   }
@@ -82,6 +87,8 @@ const PostItSmall: React.FC<props> = (props) => {
 
       setOffsetExpanded([offsetX, offsetY])
       setIsDraggingExpanded(true);
+
+
     }
 
   }
@@ -116,7 +123,7 @@ const PostItSmall: React.FC<props> = (props) => {
         height: "150px",
         backgroundColor: "lightyellow",
         background: "#FFF09F",
-        boxShadow: `0px ${isDragging ? "14px  15px" : "4px 4px"} rgba(0, 0, 0, 0.25)`,
+        boxShadow: props.PostIt.position.isMoving ? "0px 14px  15px rgba(0, 0, 0, 0.25)" : "0px 4px 4px rgba(0, 0, 0, 0.25)",
         borderRadius: "2px",
         padding: "15px",
         boxSizing: "border-box",
@@ -129,7 +136,7 @@ const PostItSmall: React.FC<props> = (props) => {
       <div style={{ position: "absolute", color: "grey", bottom: "-10px", right: "5px", fontSize: "0.7em" }}>
         <p>{props.PostIt.createdBy + ", " + props.PostIt.body.map(c => c.author).join(", ")}</p>
       </div>
-    </div>
+    </div >
   )
 }
 

@@ -1,7 +1,7 @@
 using System;
 namespace msgHub
 {
-  public class editTextBlockTextFromClient
+  public class EditTextBlockTextFromClient
   {
     public string Value { get; set; }
     public string TextBlockId { get; set; }
@@ -9,7 +9,7 @@ namespace msgHub
 
 
   }
-  public class EditTextBlockTex
+  public class EditTextBlockTextFromServer
   {
     public string Value { get; set; }
     public string TextBlockId { get; set; }

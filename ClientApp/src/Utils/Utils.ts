@@ -26,14 +26,18 @@ export const GetAlertColor = (type: AlertType) => {
   }
 }
 
-export const GetRandomColor = (i: number) => {
+export const GetRandomColor: (i: number) => string = (i) => {
   switch (i) {
-    case 0: return "#FFCAB1"
-    case 1: return "#ECDCB0"
-    case 2: return "#C1D7AE"
-    case 3: return "#FFD3BA"
-    case 4: return "#FBFFF1"
-    case 5: return "#F4F4ED"
+    case 0: return "rgba(209, 245, 255, 0.3)";
+    case 1: return "rgba(217, 249, 165, 0.3)";
+    case 2: return "rgba(229, 164, 203, 0.3)";
+    case 3: return "rgba(148, 168, 154, 0.3)";
+    case 4: return "rgba(247, 249, 249, 0.3)";
+    case 5: return "rgba(253, 231, 76, 0.3)";
+    default: {
+      const color = GetRandomColor(Math.floor(Math.random() * 5));
+      return color;
+    }
   }
 
   return "green";

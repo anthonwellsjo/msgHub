@@ -4,7 +4,7 @@ export interface EditTextBlockTextFromClient {
   postItId: string;
 }
 
-export interface EditTextBlockTex {
+export interface EditTextBlockTextFromServer {
   value: string;
   textBlockId: string;
   postItId: string;
