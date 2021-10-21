@@ -25,3 +25,16 @@ export const GetAlertColor = (type: AlertType) => {
     }
   }
 }
+
+export const GetRandomColor = (i: number) => {
+  switch (i) {
+    case 0: return "#FFCAB1"
+    case 1: return "#ECDCB0"
+    case 2: return "#C1D7AE"
+    case 3: return "#FFD3BA"
+    case 4: return "#FBFFF1"
+    case 5: return "#F4F4ED"
+  }
+
+  return "green";
+}

@@ -16,17 +16,23 @@ namespace msgHub
       await Task.Delay(500);
       return;
     }
+
+    public async Task AddBlockText(NewBlockTextPayloadFromServer data)
+    {
+      await Task.Delay(500);
+      return;
+    }
     public async Task<Whiteboard> GetWhiteBoard()
     {
       await Task.Delay(500);
 
       var post1 = new PostIt()
       {
-        ID = "post1",
+        Id = "post1",
         Header = "Dirty sheets in room 12!",
         Body = new TextBlock[]{
           new TextBlock(){
-            ID = "post1block1",
+            Id = "post1block1",
             Author = "John",
             Text = "I couldn't change them yesterday because something...",
             Formatting = new Format[] {
@@ -35,7 +41,7 @@ namespace msgHub
             LastUpdated= new DateTime(2020,09,28,16,05,25),
           },
           new TextBlock(){
-            ID = "post1block2",
+            Id = "post1block2",
             Author = "Teresa",
             Text = "Ok done!",
             Formatting = new Format[] {
@@ -58,11 +64,11 @@ namespace msgHub
 
       var post2 = new PostIt()
       {
-        ID = "post2",
+        Id = "post2",
         Header = "Monkey loose!",
         Body = new TextBlock[]{
           new TextBlock(){
-            ID = "post2block1",
+            Id = "post2block1",
             Author = "Liza",
             Text = "It's in the kitchen eating bananas.",
             Formatting = new Format[] {
@@ -71,7 +77,7 @@ namespace msgHub
             LastUpdated= new DateTime(2020,09,28,10,15,45),
           },
           new TextBlock(){
-            ID = "post2block2",
+            Id = "post2block2",
             Author = "Tom",
             Text = "That's weird. I closed him in his cage yesterday night.",
             LastUpdated= new DateTime(2020,09,28,18,05,25),

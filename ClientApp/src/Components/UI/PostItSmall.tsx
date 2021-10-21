@@ -7,7 +7,7 @@ import { whiteBoardName } from '../../Utils/Utils';
 
 interface props {
   PostIt: PostIt,
-  onOpen: (PostIt: PostIt) => void
+  onOpen: (PostItId: string) => void
 }
 
 const PostItSmall: React.FC<props> = (props) => {
@@ -32,7 +32,7 @@ const PostItSmall: React.FC<props> = (props) => {
   const CheckDoubleClick = () => {
     if (timer != null) {
       if (Date.now() - timer < 500) {
-        props.onOpen(props.PostIt);
+        props.onOpen(props.PostIt.id);
         return true;
       } else {
         setTimer(Date.now());
@@ -126,8 +126,8 @@ const PostItSmall: React.FC<props> = (props) => {
         flexDirection: "column",
       }}>
       <h4 style={{ textAlign: "center", fontFamily: "handwriting", fontSize: "1.2em", marginTop: "-10px" }}>{props.PostIt.header}</h4>
-      <div style={{ position: "absolute", color: "grey", bottom: "-10px", right: "10px", fontSize: "0.75em" }}>
-        <p>{props.PostIt.createdBy}</p>
+      <div style={{ position: "absolute", color: "grey", bottom: "-10px", right: "5px", fontSize: "0.7em" }}>
+        <p>{props.PostIt.createdBy + ", " + props.PostIt.body.map(c => c.author).join(", ")}</p>
       </div>
     </div>
   )

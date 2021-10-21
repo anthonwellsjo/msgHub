@@ -29,6 +29,11 @@ namespace msgHub
       await Clients.Group(groupName).SendAsync("movePostIt", payload);
     }
 
+    public async Task editTextBlockText(editTextBlockTextFromClient payload, string groupName)
+    {
+      await Clients.Group(groupName).SendAsync("editTextBlockText", payload);
+    }
+
   }
 
 }

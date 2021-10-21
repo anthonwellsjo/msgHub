@@ -6,6 +6,7 @@ namespace msgHub
   {
     Task LogInUser(string User);
     Task LogOutUser(string User);
+    Task AddBlockText(NewBlockTextPayloadFromServer data);
     Task<Whiteboard> GetWhiteBoard();
   }
 }
