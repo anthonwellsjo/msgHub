@@ -1,14 +1,48 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { NewPostItPayloadFromClient } from '../../Types/newPostItPayload';
+import { PostItPosition } from '../../Types/postItPosition';
+import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
+import { selectUserName } from '../../Utils/Redux/features/msgHub/userSlice';
+import { useAppSelector } from '../../Utils/Redux/hooks';
+import { SendToHub } from '../../Utils/SignalR/SignalRHub';
 import PlusButton from './PlusButton';
 
 const NewPostIt: React.FC = () => {
+  const [hubConnection] = useContext(HubConnectionContext);
+  const offsetY = 50;
+  const offsetX = 50;
+  const username = useAppSelector(selectUserName);
+
+  const onNewPostItMouse: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    const x = e.clientX - offsetX;
+    const y = e.clientY - offsetY;
+    const position: PostItPosition = { isMoving: true, x: x, y: y };
+    if (username) {
+      const payload: NewPostItPayloadFromClient = { position: position, createdBy: username };
+      SendToHub(payload, "newPostIt", (hubConnection as signalR.HubConnection));
+    } else {
+      throw new Error("No username available to create postit");
+    }
+  }
+
+  const onNewPostItTouch: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    const x = Math.floor(e.targetTouches[0].clientX - offsetX);
+    const y = Math.floor(e.targetTouches[0].clientY - offsetY);
+    const position: PostItPosition = { isMoving: true, x: x, y: y };
+    if (username) {
+      const payload: NewPostItPayloadFromClient = { position: position, createdBy: username };
+      SendToHub(payload, "newPostIt", (hubConnection as signalR.HubConnection));
+
+    } else {
+      throw new Error("No username available to create postit");
+    }
+  }
+
+
   return (
     <div
-      // onMouseDown={onMouseDownEventHandler}
-      // onMouseUp={onDragStopEventHander}
-      // onTouchStart={onTouchStartEventHander}
-      // onTouchMove={onTouchMoveEventHandler}
-      // onTouchEnd={onDragStopEventHander}
+      onMouseDown={onNewPostItMouse}
+      onTouchStart={onNewPostItTouch}
       style={{
         cursor: "pointer",
         userSelect: "none",

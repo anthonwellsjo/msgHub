@@ -47,5 +47,10 @@ namespace msgHub
       var data = new TrashPostItFromServer(payload);
       await Clients.Group(groupName).SendAsync("trashPostIt", data);
     }
+    public async Task NewPostIt(NewPostItPayloadFromClient payload, string groupName)
+    {
+      var data = new NewPostItPayloadFromServer(payload);
+      await Clients.Group(groupName).SendAsync("newPostIt", data);
+    }
   }
 }

@@ -1,9 +1,13 @@
 import React from 'react';
 import logo from '../../Public/ymca_logo.png';
+import { selectUserStatus } from '../../Utils/Redux/features/msgHub/userSlice';
+import { useAppSelector } from '../../Utils/Redux/hooks';
 import NewPostIt from './NewPostIt';
 
 
 const Header: React.FC = () => {
+  const userStatus = useAppSelector(selectUserStatus);
+
 
   return (
     <div style={{
@@ -17,7 +21,7 @@ const Header: React.FC = () => {
       justifyContent: "space-between"
     }}>
       <img style={{ marginTop: "10px" }} width={100} src={logo} alt="logo" />
-      <NewPostIt/>
+      {userStatus === "Online" && <NewPostIt />}
     </div>
   )
 }

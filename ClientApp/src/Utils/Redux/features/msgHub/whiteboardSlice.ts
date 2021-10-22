@@ -11,6 +11,7 @@ import { EditTextBlockTextFromClient } from '../../../../Types/editTextBlockText
 import { DeleteTextBlockFromServer } from '../../../../Types/deleteTextBlock';
 import { IsPostItMovingFromServer } from '../../../../Types/isPostItMoving';
 import { TrashPostItFromServer } from '../../../../Types/trashPostIt';
+import { NewPostItPayloadFromServer } from '../../../../Types/newPostItPayload';
 
 
 export interface WhiteboardState {
@@ -101,6 +102,14 @@ export const whiteboardState = createSlice({
 
       }
     },
+    newPostIt: (state, action: PayloadAction<NewPostItPayloadFromServer>) => {
+      if (state.whiteboard !== undefined) {
+        if (state.whiteboard.postits === undefined) {
+          state.whiteboard.postits = [];
+        }
+        state.whiteboard.postits.push(action.payload);
+      }
+    },
     trashPostIt: (state, action: PayloadAction<TrashPostItFromServer>) => {
       if (state.whiteboard !== undefined) {
         const index = state.whiteboard.postits.findIndex(p => p.id === action.payload.postItId);
@@ -133,6 +142,7 @@ export const { setWhiteboard,
   logOutUser,
   setNewTextBlock,
   deleteTextBlock,
+  newPostIt,
   trashPostIt,
   editTextBlockText } = whiteboardState.actions;
 

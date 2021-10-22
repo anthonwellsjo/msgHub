@@ -10,7 +10,6 @@ namespace msgHub
     public string CreatedBy{get;set;}
     public DateTime CreatedOn{get;set;}
 
-
   }
 
 }
