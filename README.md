@@ -55,8 +55,9 @@ Jag valde att som inlämning skapa ett UML-diagram över hur mina klasser ser ut
 ## Kanban
 
 ### Project: 
-<img width="1190" alt="Screenshot 2021-10-22 at 19 26 31" src="https://user-images.githubusercontent.com/58119759/138497722-00acb0a8-d64f-4c2e-ba12-9f71755ca192.png">
+<img width="1176" alt="Screenshot 2021-10-22 at 22 07 27" src="https://user-images.githubusercontent.com/58119759/138516577-f8ca0d84-02c4-4e2d-b10e-efeb41e6259f.png">
+
 
 ### User stories: 
-<img width="1440" alt="Screenshot 2021-10-22 at 19 27 12" src="https://user-images.githubusercontent.com/58119759/138497795-84831152-02ba-40de-9925-3e2ff915d9db.png">
+<img width="1379" alt="Screenshot 2021-10-22 at 22 07 55" src="https://user-images.githubusercontent.com/58119759/138516629-50eefb75-4091-44ce-bdf0-1333f8022256.png">
 
