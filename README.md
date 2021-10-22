@@ -44,7 +44,17 @@ Current data structures: https://drive.google.com/file/d/18GRQTSJHfc6mmcr0kLb6Yy
 
 # Inlämning 2: Lägesrapport
 
-### Project Kanban: 
+## UML diagram
+
+### Förord
+Jag valde att som inlämning skapa ett UML-diagram över hur mina klasser ser ut på servern. Det kan vara bra för att visualisera hur en databas i framtiden kan behövas implementeras för att fånga klassers relationer. För övriga diagram se: https://drive.google.com/file/d/18GRQTSJHfc6mmcr0kLb6YydNYSQFZVtf/view?usp=sharing
+
+![msgHub artefacts](https://user-images.githubusercontent.com/58119759/138513795-fb4bc649-1755-456c-bb8b-42e1d1f7433a.jpg)
+
+
+## Kanban
+
+### Project: 
 <img width="1190" alt="Screenshot 2021-10-22 at 19 26 31" src="https://user-images.githubusercontent.com/58119759/138497722-00acb0a8-d64f-4c2e-ba12-9f71755ca192.png">
 
 ### User stories: 
