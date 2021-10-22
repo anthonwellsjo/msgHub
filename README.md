@@ -41,3 +41,11 @@ Mitt projekt är en hybrid av dessa två idéer.
 Figma mockup: https://www.figma.com/file/ix15n10IvOB9cRe9U0wHcX/Flat-iPad-mini-Air-and-Pro-Mockup-Community?node-id=1%3A14
 
 Current data structures: https://drive.google.com/file/d/18GRQTSJHfc6mmcr0kLb6YydNYSQFZVtf/view?usp=sharing
+
+# Inlämning 2: Lägesrapport
+
+### Project Kanban: 
+<img width="1190" alt="Screenshot 2021-10-22 at 19 26 31" src="https://user-images.githubusercontent.com/58119759/138497722-00acb0a8-d64f-4c2e-ba12-9f71755ca192.png">
+
+### User stories: 
+<img width="1440" alt="Screenshot 2021-10-22 at 19 27 12" src="https://user-images.githubusercontent.com/58119759/138497795-84831152-02ba-40de-9925-3e2ff915d9db.png">
