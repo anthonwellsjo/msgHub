@@ -59,3 +59,4 @@ Jag valde att som inlämning skapa ett UML-diagram över hur mina klasser ser ut
 
 ### User stories: 
 <img width="1440" alt="Screenshot 2021-10-22 at 19 27 12" src="https://user-images.githubusercontent.com/58119759/138497795-84831152-02ba-40de-9925-3e2ff915d9db.png">
+
