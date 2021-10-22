@@ -47,7 +47,7 @@ Current data structures: https://drive.google.com/file/d/18GRQTSJHfc6mmcr0kLb6Yy
 ## UML diagram
 
 ### Förord
-Jag valde att som inlämning skapa ett UML-diagram över hur mina klasser ser ut på servern. Det kan vara bra för att visualisera hur en databas i framtiden kan behövas implementeras för att fånga klassers relationer. För övriga diagram se: https://drive.google.com/file/d/18GRQTSJHfc6mmcr0kLb6YydNYSQFZVtf/view?usp=sharing
+Jag valde att som inlämning skapa ett UML-diagram över hur mina klasser ser ut på servern. Detta beslut togs efter att jag tog upp den idén på dagens handledning (22/10-2021) och det godtogs som en giltig inlämning. Det kan vara bra för att visualisera hur en databas i framtiden kan behövas implementeras för att fånga klassers relationer. För övriga diagram se: https://drive.google.com/file/d/18GRQTSJHfc6mmcr0kLb6YydNYSQFZVtf/view?usp=sharing
 
 ![msgHub artefacts](https://user-images.githubusercontent.com/58119759/138513795-fb4bc649-1755-456c-bb8b-42e1d1f7433a.jpg)
 
