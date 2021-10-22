@@ -4,7 +4,8 @@ import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { selectUserName } from '../../Utils/Redux/features/msgHub/userSlice';
 import { selectWhiteboard, trashPostIt } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
 import { useAppDispatch, useAppSelector } from '../../Utils/Redux/hooks';
-import { whiteBoardName } from '../../Utils/Utils';
+import { SendToHub } from '../../Utils/SignalR/SignalRHub';
+import { tempWhiteBoardName } from '../../Utils/Utils';
 
 const PostItTrashCan: React.FC = () => {
   const [hover, setHover] = useState(false);
@@ -15,7 +16,7 @@ const PostItTrashCan: React.FC = () => {
     const postItId = whiteboard?.postits.find(p => p.position.isMoving)?.id;
     if (postItId !== undefined && username) {
       const payload: TrashPostItFromClient = { postItId: postItId, user: username };
-      (hubConnection as signalR.HubConnection).send("trashPostIt", payload, whiteBoardName);
+      SendToHub(payload, "trashPostIt", (hubConnection as signalR.HubConnection));
     }
   }
 

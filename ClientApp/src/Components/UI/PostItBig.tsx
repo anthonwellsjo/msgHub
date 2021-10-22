@@ -7,7 +7,8 @@ import { postTextBlock } from '../../Utils/api';
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { selectUserName } from '../../Utils/Redux/features/msgHub/userSlice';
 import { useAppSelector } from '../../Utils/Redux/hooks';
-import { GetRandomColor, whiteBoardName } from '../../Utils/Utils';
+import { SendToHub } from '../../Utils/SignalR/SignalRHub';
+import { GetRandomColor, tempWhiteBoardName } from '../../Utils/Utils';
 import AddTextBlockButton from './AddTextBlockButton';
 import Loader from './Loader';
 import PlusButton from './PlusButton';
@@ -46,7 +47,7 @@ const PostItBig: React.FC<props> = (props) => {
   const onTextBlockChangeEventHandler = (value: string, blockId: string) => {
     console.log("event");
     const payload: EditTextBlockTextFromClient = { value: value, textBlockId: blockId, postItId: props.PostIt.id };
-    (hubConnection as signalR.HubConnection).send("editTextBlockText", payload, whiteBoardName);
+    SendToHub(payload, "editTextBlockText", (hubConnection as signalR.HubConnection));
   }
 
   const stopEditingTextBlock = () => {
@@ -62,7 +63,7 @@ const PostItBig: React.FC<props> = (props) => {
       }
       console.log("deleting");
       const payload: DeleteTextBlockFromClient = { postItId: props.PostIt.id, textBlockId: block.id };
-      (hubConnection as signalR.HubConnection).send("deleteTextBlock", payload, whiteBoardName);
+      SendToHub(payload,"deleteTextBlock",(hubConnection as signalR.HubConnection));
       setEditBlock(undefined);
       setshowLoaderIfThisNumberIsSameAsNumberOfPostIts(undefined);
     }

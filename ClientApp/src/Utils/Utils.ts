@@ -1,7 +1,7 @@
 import { AlertType } from "../Types/alertType";
 
 
-export const whiteBoardName = "redrum";
+export const tempWhiteBoardName = "redrum";
 
 const names = [
   "rumstump", "fiskbert", "slasktratt", "regnhus", "lingonflinga", "fisksenap", "fiskgrönsak", "hjort", "splitter", "spacka", "aieie"

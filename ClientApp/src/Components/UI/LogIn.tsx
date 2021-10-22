@@ -6,7 +6,7 @@ import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { setUserName, setUserStatus } from '../../Utils/Redux/features/msgHub/userSlice';
 import { setUsersLoggedIn } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
 import { useAppDispatch, useAppSelector } from '../../Utils/Redux/hooks';
-import { randomName, whiteBoardName } from '../../Utils/Utils';
+import { randomName, tempWhiteBoardName } from '../../Utils/Utils';
 
 
 
@@ -25,7 +25,7 @@ const Login: React.FC = () => {
     if (hubConnection.connectionId !== undefined) {
       dispatch(setUserStatus("Pending"));
       try {
-        loginUser(name, whiteBoardName, hubConnection.connectionId)
+        loginUser(name, tempWhiteBoardName, hubConnection.connectionId)
           .then(() => {
             dispatch(setUserName(name));
             dispatch(setUserStatus("Online"));

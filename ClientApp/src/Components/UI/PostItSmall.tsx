@@ -4,8 +4,9 @@ import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import * as signalR from '@microsoft/signalr';
 import { MovePostItPayload } from '../../Types/movePostItPayload';
 import { useAppDispatch } from '../../Utils/Redux/hooks';
-import { whiteBoardName } from '../../Utils/Utils';
+import { tempWhiteBoardName } from '../../Utils/Utils';
 import { IsPostItMovingFromClient } from '../../Types/isPostItMoving';
+import { SendToHub } from '../../Utils/SignalR/SignalRHub';
 
 
 interface props {
@@ -22,7 +23,7 @@ const PostItSmall: React.FC<props> = (props) => {
   const isDraggingRef = useRef(isDragging);
   const setIsDraggingExpanded = (value: boolean) => {
     const payload: IsPostItMovingFromClient = { value: value, postItId: props.PostIt.id };
-    (hubConnection as signalR.HubConnection).send("isPostItMoving", payload, whiteBoardName);
+    SendToHub(payload, "isPostItMoving", (hubConnection as signalR.HubConnection));
     isDraggingRef.current = value;
   }
 
@@ -53,7 +54,7 @@ const PostItSmall: React.FC<props> = (props) => {
       const x = e.clientX - offsetRef.current[0];
       const y = e.clientY - offsetRef.current[1];
       const payload: MovePostItPayload = { x: x, y: y, postItId: props.PostIt.id };
-      (hubConnection as signalR.HubConnection).send("movePostIt", payload, whiteBoardName);
+      SendToHub(payload,"movePostIt", (hubConnection as signalR.HubConnection));
     }
   }
   const onMouseDownEventHandler: React.MouseEventHandler<HTMLDivElement> = (e) => {
@@ -72,7 +73,7 @@ const PostItSmall: React.FC<props> = (props) => {
       const x = Math.floor(e.targetTouches[0].clientX - offsetRef.current[0]);
       const y = Math.floor(e.targetTouches[0].clientY - offsetRef.current[1]);
       const payload: MovePostItPayload = { x: x, y: y, postItId: props.PostIt.id };
-      (hubConnection as signalR.HubConnection).send("movePostIt", payload, whiteBoardName);
+      SendToHub(payload,"movePostIt", (hubConnection as signalR.HubConnection));
     }
   }
   const onTouchStartEventHander: React.TouchEventHandler<HTMLDivElement> = (e: any) => {
