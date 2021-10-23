@@ -7,6 +7,7 @@ import { TrashPostItFromClient } from "../../Types/trashPostIt"
 import { tempWhiteBoardName } from "../Utils"
 import * as signalR from '@microsoft/signalr';
 import { NewPostItPayloadFromClient } from "../../Types/newPostItPayload"
+import { EditPostItHeaderFromClient } from "../../Types/editPostItHeader"
 
 type Payload = DeleteTextBlockFromClient |
   EditTextBlockTextFromClient |
@@ -14,12 +15,14 @@ type Payload = DeleteTextBlockFromClient |
   MovePostItPayload |
   NewBlockTextPayloadFromClient |
   TrashPostItFromClient |
+  EditPostItHeaderFromClient |
   NewPostItPayloadFromClient;
 type Action = "editTextBlockText" |
   "deleteTextBlock" |
   "isPostItMoving" |
   "movePostIt" |
   "trashPostIt" |
+  "editPostItHeader" |
   "newPostIt";
 
 export const SendToHub:

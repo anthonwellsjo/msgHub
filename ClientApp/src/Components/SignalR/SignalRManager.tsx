@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../Utils/Redux/hooks';
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { useSelector } from 'react-redux';
 import { MovePostItPayload } from '../../Types/movePostItPayload';
-import { deleteTextBlock, editTextBlockText, newPostIt, setNewTextBlock, setPostItIsMoving, setPostItPosition, setUsersLoggedIn, trashPostIt } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
+import { deleteTextBlock, editPostItHeader, editTextBlockText, newPostIt, setNewTextBlock, setPostItIsMoving, setPostItPosition, setUsersLoggedIn, trashPostIt } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
 import { AlertContext } from '../../Utils/Context/alertContext';
 import { AlertItem } from '../../Types/alertItem';
 import { GetAlertColor } from '../../Utils/Utils';
@@ -17,6 +17,7 @@ import { DeleteTextBlockFromServer } from '../../Types/deleteTextBlock';
 import { IsPostItMovingFromServer } from '../../Types/isPostItMoving';
 import { TrashPostItFromServer } from '../../Types/trashPostIt';
 import { NewPostItPayloadFromServer } from '../../Types/newPostItPayload';
+import { EditPostItHeaderFromServer } from '../../Types/editPostItHeader';
 
 const SignalRManager: React.FC = ({ children }) => {
   const dispatch = useAppDispatch();
@@ -78,6 +79,10 @@ const SignalRManager: React.FC = ({ children }) => {
 
           hubConnection.on("newPostIt", (payload: NewPostItPayloadFromServer) => {
             dispatch(newPostIt(payload));
+          });
+
+          hubConnection.on("editPostItHeader", (payload: EditPostItHeaderFromServer) => {
+            dispatch(editPostItHeader(payload));
           });
         })
         .catch((error: any) => { throw error; })

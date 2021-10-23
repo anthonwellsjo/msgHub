@@ -19,7 +19,7 @@ const Login: React.FC = () => {
   const onLoginEventHandler = () => {
 
     if (name.length < 1) {
-      setName(randomName());
+      setName(randomName().split("").map((l, i) => i === 0 ? l.toUpperCase() : l).join(""));
       return;
     }
     if (hubConnection.connectionId !== undefined) {

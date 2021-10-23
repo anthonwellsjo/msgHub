@@ -3,10 +3,13 @@ import { PostIt } from '../../Types/postIt';
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import * as signalR from '@microsoft/signalr';
 import { MovePostItPayload } from '../../Types/movePostItPayload';
-import { useAppDispatch } from '../../Utils/Redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../Utils/Redux/hooks';
 import { tempWhiteBoardName } from '../../Utils/Utils';
 import { IsPostItMovingFromClient } from '../../Types/isPostItMoving';
 import { SendToHub } from '../../Utils/SignalR/SignalRHub';
+import PlusButton from './PlusButton';
+import { selectUserName } from '../../Utils/Redux/features/msgHub/userSlice';
+import { EditPostItHeaderFromClient } from '../../Types/editPostItHeader';
 
 
 interface props {
@@ -16,9 +19,11 @@ interface props {
 
 const PostItSmall: React.FC<props> = (props) => {
   const isDragging = props.PostIt.position.isMoving;
+  const [editHeader, setEditHeader] = useState(false);
   const [timer, setTimer] = useState(Date.now());
   const [offset, setOffset] = useState([0, 0]);
   const [hubConnection] = useContext<any>(HubConnectionContext);
+  const username = useAppSelector(selectUserName);
 
   const isDraggingRef = useRef(isDragging);
   const setIsDraggingExpanded = (value: boolean) => {
@@ -54,7 +59,7 @@ const PostItSmall: React.FC<props> = (props) => {
       const x = e.clientX - offsetRef.current[0];
       const y = e.clientY - offsetRef.current[1];
       const payload: MovePostItPayload = { x: x, y: y, postItId: props.PostIt.id };
-      SendToHub(payload,"movePostIt", (hubConnection as signalR.HubConnection));
+      SendToHub(payload, "movePostIt", (hubConnection as signalR.HubConnection));
     }
   }
   const onMouseDownEventHandler: React.MouseEventHandler<HTMLDivElement> = (e) => {
@@ -73,7 +78,7 @@ const PostItSmall: React.FC<props> = (props) => {
       const x = Math.floor(e.targetTouches[0].clientX - offsetRef.current[0]);
       const y = Math.floor(e.targetTouches[0].clientY - offsetRef.current[1]);
       const payload: MovePostItPayload = { x: x, y: y, postItId: props.PostIt.id };
-      SendToHub(payload,"movePostIt", (hubConnection as signalR.HubConnection));
+      SendToHub(payload, "movePostIt", (hubConnection as signalR.HubConnection));
     }
   }
   const onTouchStartEventHander: React.TouchEventHandler<HTMLDivElement> = (e: any) => {
@@ -95,6 +100,11 @@ const PostItSmall: React.FC<props> = (props) => {
   }
   const onDragStopEventHander = () => {
     setIsDraggingExpanded(false);
+  }
+
+  const onHeaderChangeEventHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const payload: EditPostItHeaderFromClient = { postItId: props.PostIt.id, value: e.target.value };
+    SendToHub(payload, "editPostItHeader", (hubConnection as signalR.HubConnection));
   }
 
   useEffect(() => {
@@ -133,9 +143,19 @@ const PostItSmall: React.FC<props> = (props) => {
         alignItems: "center",
         flexDirection: "column",
       }}>
-      <h4 style={{ textAlign: "center", fontFamily: "handwriting", fontSize: "1.2em", marginTop: "-10px" }}>{props.PostIt.header}</h4>
-      <div style={{ position: "absolute", color: "grey", bottom: "-10px", right: "5px", fontSize: "0.7em" }}>
-        <p>{props.PostIt.createdBy + ", " + props.PostIt.body.map(c => c.author).join(", ")}</p>
+      {props.PostIt.header.length < 1 && props.PostIt.createdBy === username && !editHeader &&
+        <button onClick={() => { setEditHeader(true); }}>
+          <PlusButton />
+        </button>
+      }
+      {props.PostIt.createdBy === username && editHeader &&
+        <input onChange={onHeaderChangeEventHandler} value={props.PostIt.header} />
+      }
+      {props.PostIt.header.length > 0 && !editHeader &&
+        <h4 style={{ textAlign: "center", fontFamily: "handwriting", fontSize: "1.2em", marginTop: "-10px" }}>{props.PostIt.header}</h4>
+      }
+      <div style={{ position: "absolute", bottom: "-10px", right: "5px", fontSize: "0.7em", textAlign: "right" }}>
+        <p className="subtitle">{props.PostIt.createdBy + " on " + new Date(props.PostIt.createdOn).toDateString() + "."}</p>
       </div>
     </div >
   )

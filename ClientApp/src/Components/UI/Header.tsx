@@ -20,7 +20,7 @@ const Header: React.FC = () => {
       alignItems: "center",
       justifyContent: "space-between"
     }}>
-      <img style={{ marginTop: "10px" }} width={100} src={logo} alt="logo" />
+      <img style={{ marginTop: "40px", marginLeft:"10px" }} width={100} src={logo} alt="logo" />
       {userStatus === "Online" && <NewPostIt />}
     </div>
   )

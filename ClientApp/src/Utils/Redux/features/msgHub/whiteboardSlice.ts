@@ -12,6 +12,7 @@ import { DeleteTextBlockFromServer } from '../../../../Types/deleteTextBlock';
 import { IsPostItMovingFromServer } from '../../../../Types/isPostItMoving';
 import { TrashPostItFromServer } from '../../../../Types/trashPostIt';
 import { NewPostItPayloadFromServer } from '../../../../Types/newPostItPayload';
+import { EditPostItHeaderFromServer } from '../../../../Types/editPostItHeader';
 
 
 export interface WhiteboardState {
@@ -110,6 +111,11 @@ export const whiteboardState = createSlice({
         state.whiteboard.postits.push(action.payload);
       }
     },
+    editPostItHeader: (state, action: PayloadAction<EditPostItHeaderFromServer>) => {
+      if (state.whiteboard !== undefined) {
+        state.whiteboard.postits.find(p => p.id === action.payload.postItId)!.header = action.payload.value;
+      }
+    },
     trashPostIt: (state, action: PayloadAction<TrashPostItFromServer>) => {
       if (state.whiteboard !== undefined) {
         const index = state.whiteboard.postits.findIndex(p => p.id === action.payload.postItId);
@@ -144,6 +150,7 @@ export const { setWhiteboard,
   deleteTextBlock,
   newPostIt,
   trashPostIt,
+  editPostItHeader,
   editTextBlockText } = whiteboardState.actions;
 
 // The function below is called a selector and allows us to select a value from

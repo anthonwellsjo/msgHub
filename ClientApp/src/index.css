@@ -3,6 +3,11 @@
   font-weight: 400;
   src: url('./Public/Give_You_Glory/GiveYouGlory-Regular.ttf');
 }
+@font-face {
+  font-family: 'subtitle';
+  font-weight: 100;
+  src: url('./Public/Quicksand/static/Quicksand-Light.ttf');
+}
 
 body {
   margin: 0;
@@ -23,4 +28,9 @@ textarea,
 input {
   font-family: Rasa;
   font-size: 0.9em;
+}
+
+.subtitle{
+  font-family: subtitle;
+  font-size: 100;
 }
