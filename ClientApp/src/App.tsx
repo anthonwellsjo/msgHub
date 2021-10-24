@@ -32,12 +32,14 @@ function App() {
       alignItems: "center",
       justifyContent: "center"
     }}>
+      <canvas>
+      </canvas>
       <Header />
       <Body>
         {userStatus === "Offline" && <Login />}
         {userStatus === "Pending" && <Loader title="Logging in." />}
         {userStatus === "Online" && whiteboardFetchStatus === "pending" && <Loader title="Fetching whiteboard" />}
-        {userStatus === "Online" && whiteboardFetchStatus === "done" && <Whiteboard/>}
+        {userStatus === "Online" && whiteboardFetchStatus === "done" && <Whiteboard />}
       </Body>
     </div>
   );
