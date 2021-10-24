@@ -63,7 +63,7 @@ const PostItBig: React.FC<props> = (props) => {
       }
       console.log("deleting");
       const payload: DeleteTextBlockFromClient = { postItId: props.PostIt.id, textBlockId: block.id };
-      SendToHub(payload,"deleteTextBlock",(hubConnection as signalR.HubConnection));
+      SendToHub(payload, "deleteTextBlock", (hubConnection as signalR.HubConnection));
       setEditBlock(undefined);
       setshowLoaderIfThisNumberIsSameAsNumberOfPostIts(undefined);
     }
@@ -111,7 +111,10 @@ const PostItBig: React.FC<props> = (props) => {
         <header>
           <h3 style={{ fontFamily: "handwriting", fontSize: "2em", textAlign: "center" }}>{props.PostIt.header}</h3>
         </header>
-        <main>
+        <main style={{
+          position: "relative",
+          width: "80%"
+        }}>
           {props.PostIt.body.map((b, i, a) => (
             <PostItTextBlock
               onChangeEventHandler={onTextBlockChangeEventHandler}

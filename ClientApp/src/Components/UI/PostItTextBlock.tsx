@@ -39,9 +39,10 @@ const PostItTextBlock: React.FC<props> = ({ block, index, userEditing = false, o
         borderRadius: "2px"
       }}>
       <div style={{
-        backgroundColor: userEditing ? "white" : bcgColor, width: "100%", height: "100%",
+        backgroundColor: userEditing ? "white" : bcgColor,
+        width: "100%",
+        height: "100%",
         boxSizing: "border-box",
-
         padding: "20px 10px",
       }}>
         <main style={{ marginTop: "-20px", display: "flex", flexDirection: "column", justifyContent: "center", }}>
@@ -72,7 +73,7 @@ const PostItTextBlock: React.FC<props> = ({ block, index, userEditing = false, o
           }
         </main>
         <div style={{ position: "absolute", color: "grey", right: "5px", bottom: "-10px", fontSize: "0.7em" }}>
-          <p>{editable ? "You " : block.author} on {new Date(block.lastUpdated).toDateString()}</p>
+          <p>{editable ? <strong>You </strong> : <strong>{block.author}</strong>} on {new Date(block.lastUpdated).toDateString()}</p>
         </div>
       </div>
     </div >

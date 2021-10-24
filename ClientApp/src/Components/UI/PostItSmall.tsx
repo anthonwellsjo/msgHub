@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { createRef, useContext, useEffect, useRef, useState } from 'react';
 import { PostIt } from '../../Types/postIt';
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import * as signalR from '@microsoft/signalr';
@@ -24,6 +24,7 @@ const PostItSmall: React.FC<props> = (props) => {
   const [offset, setOffset] = useState([0, 0]);
   const [hubConnection] = useContext<any>(HubConnectionContext);
   const username = useAppSelector(selectUserName);
+  const inputRef: React.RefObject<HTMLInputElement> = createRef();
 
   const isDraggingRef = useRef(isDragging);
   const setIsDraggingExpanded = (value: boolean) => {
@@ -101,6 +102,11 @@ const PostItSmall: React.FC<props> = (props) => {
   const onDragStopEventHander = () => {
     setIsDraggingExpanded(false);
   }
+  const onClickWhenEditingHeaderEventHandler = () => {
+    if (editHeader) {
+      setEditHeader(false);
+    }
+  }
 
   const onHeaderChangeEventHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const payload: EditPostItHeaderFromClient = { postItId: props.PostIt.id, value: e.target.value };
@@ -115,6 +121,12 @@ const PostItSmall: React.FC<props> = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (editHeader) {
+      inputRef.current?.focus();
+    }
+  }, [editHeader])
+
 
   return (
     <div
@@ -123,6 +135,7 @@ const PostItSmall: React.FC<props> = (props) => {
       onTouchStart={onTouchStartEventHander}
       onTouchMove={onTouchMoveEventHandler}
       onTouchEnd={onDragStopEventHander}
+      onClick={onClickWhenEditingHeaderEventHandler}
       style={{
         cursor: "pointer",
         userSelect: "none",
@@ -149,10 +162,22 @@ const PostItSmall: React.FC<props> = (props) => {
         </button>
       }
       {props.PostIt.createdBy === username && editHeader &&
-        <input onChange={onHeaderChangeEventHandler} value={props.PostIt.header} />
+        <input style={{
+          outline: "none",
+          border: "none",
+          backgroundColor: "transparent",
+          textAlign: "center",
+          fontFamily: "handwriting",
+          fontSize: "1.2em",
+          marginTop: "-10px",
+          fontWeight: 600
+        }}
+          ref={inputRef}
+          onChange={onHeaderChangeEventHandler}
+          value={props.PostIt.header} />
       }
       {props.PostIt.header.length > 0 && !editHeader &&
-        <h4 style={{ textAlign: "center", fontFamily: "handwriting", fontSize: "1.2em", marginTop: "-10px" }}>{props.PostIt.header}</h4>
+        <h4 style={{ textAlign: "center", fontFamily: "handwriting", fontSize: "1.2em", marginTop: "-10px", fontWeight: 600 }}>{props.PostIt.header}</h4>
       }
       <div style={{ position: "absolute", bottom: "-10px", right: "5px", fontSize: "0.7em", textAlign: "right" }}>
         <p className="subtitle">{props.PostIt.createdBy + " on " + new Date(props.PostIt.createdOn).toDateString() + "."}</p>
