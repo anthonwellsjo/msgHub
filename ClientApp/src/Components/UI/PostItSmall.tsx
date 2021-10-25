@@ -112,6 +112,13 @@ const PostItSmall: React.FC<props> = (props) => {
     const payload: EditPostItHeaderFromClient = { postItId: props.PostIt.id, value: e.target.value };
     SendToHub(payload, "editPostItHeader", (hubConnection as signalR.HubConnection));
   }
+  const onKeyDownEventHandler: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === "Enter") {
+      if (props.PostIt.header.length > 0) {
+        setEditHeader(false);
+      }
+    }
+  }
 
   useEffect(() => {
     window.addEventListener("mousemove", MouseMoveEventHandler)
@@ -125,7 +132,7 @@ const PostItSmall: React.FC<props> = (props) => {
     if (editHeader) {
       inputRef.current?.focus();
     }
-  }, [editHeader])
+  }, [editHeader]);
 
 
   return (
@@ -174,6 +181,7 @@ const PostItSmall: React.FC<props> = (props) => {
         }}
           ref={inputRef}
           onChange={onHeaderChangeEventHandler}
+          onKeyDown={onKeyDownEventHandler}
           value={props.PostIt.header} />
       }
       {props.PostIt.header.length > 0 && !editHeader &&

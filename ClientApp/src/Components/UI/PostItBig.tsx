@@ -34,7 +34,6 @@ const PostItBig: React.FC<props> = (props) => {
         .then(() => {
           const index = props.PostIt.body.length;
           setEditBlock(index);
-          console.log("index", index);
         })
         .catch((error) => {
           throw error;
@@ -45,7 +44,6 @@ const PostItBig: React.FC<props> = (props) => {
     }
   }
   const onTextBlockChangeEventHandler = (value: string, blockId: string) => {
-    console.log("event");
     const payload: EditTextBlockTextFromClient = { value: value, textBlockId: blockId, postItId: props.PostIt.id };
     SendToHub(payload, "editTextBlockText", (hubConnection as signalR.HubConnection));
   }
@@ -61,7 +59,6 @@ const PostItBig: React.FC<props> = (props) => {
           return;
         }
       }
-      console.log("deleting");
       const payload: DeleteTextBlockFromClient = { postItId: props.PostIt.id, textBlockId: block.id };
       SendToHub(payload, "deleteTextBlock", (hubConnection as signalR.HubConnection));
       setEditBlock(undefined);
@@ -72,10 +69,6 @@ const PostItBig: React.FC<props> = (props) => {
   const startEditingTextBlock = (blockId: string) => {
     setEditBlock(props.PostIt.body.findIndex(p => p.id === blockId));
   }
-
-  useEffect(() => {
-    console.log("rerender big postit")
-  })
 
   return (
     <div
@@ -117,6 +110,7 @@ const PostItBig: React.FC<props> = (props) => {
         }}>
           {props.PostIt.body.map((b, i, a) => (
             <PostItTextBlock
+              stopEditing={stopEditingTextBlock}
               onChangeEventHandler={onTextBlockChangeEventHandler}
               userEditing={props.PostIt.body[i].author === user && i === editBlock ? true : false}
               editable={props.PostIt.body[i].author === user}

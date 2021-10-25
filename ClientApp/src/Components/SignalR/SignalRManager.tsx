@@ -41,7 +41,6 @@ const SignalRManager: React.FC = ({ children }) => {
       hubConnection.start()
         .then(() => {
           (hubConnection as signalR.HubConnection).onclose(() => {
-            console.log("on close");
             (hubConnection as signalR.HubConnection).start();
           })
 

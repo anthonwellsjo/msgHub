@@ -22,8 +22,6 @@ function App() {
   }, [userStatus, whiteboard, dispatch])
 
 
-
-
   return (
     <div style={{
       height: "100vh",

@@ -25,6 +25,7 @@ code {
 
 p,
 textarea,
+button,
 input {
   font-family: Rasa;
   font-size: 0.9em;
@@ -39,4 +40,20 @@ input {
   cursor: url('https://icons.iconarchive.com/icons/iconsmind/outline/24/Pen-2-icon.png') -40
       80,
     auto;
+}
+
+.spin {
+  animation-name: spin;
+  animation-duration: 1500ms; /* How long lasts 1 turn */
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

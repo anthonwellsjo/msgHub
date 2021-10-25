@@ -4,7 +4,7 @@ import { AlertType } from "../Types/alertType";
 export const tempWhiteBoardName = "redrum";
 
 const names = [
-  "rumstump", "fiskbert", "slasktratt", "regnhus", "lingonflinga", "fisksenap", "fiskgrönsak", "hjort", "splitter", "spacka", "aieie"
+  "rumstump", "fiskbert", "slasktratt", "regnhus", "lingonflinga", "fisksenap", "fiskgrönsak", "hjort", "stefan", "jurgen", "aieie"
 ]
 
 export const randomName = () => {

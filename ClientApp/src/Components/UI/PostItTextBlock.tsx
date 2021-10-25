@@ -9,13 +9,19 @@ interface props {
   userEditing?: boolean,
   onChangeEventHandler: (value: string, blockId: string) => void,
   editable: boolean,
-  onUserEditClicked: (textBlockId: string) => void
+  onUserEditClicked: (textBlockId: string) => void,
+  stopEditing: () => void
 }
 
-const PostItTextBlock: React.FC<props> = ({ block, index, userEditing = false, onChangeEventHandler, editable, onUserEditClicked }) => {
+const PostItTextBlock: React.FC<props> = ({ block, index, userEditing = false, stopEditing, onChangeEventHandler, editable, onUserEditClicked }) => {
   const bcgColor = useMemo(() => GetRandomColor(index), [])
-  console.log("is editable", editable, userEditing);
   let inputRef = createRef<HTMLTextAreaElement>();
+
+  const onKeyDownEventHandler: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
+    if (e.key === "Enter") {
+      stopEditing();
+    }
+  }
 
   useEffect(() => {
     if (userEditing) {
@@ -58,14 +64,19 @@ const PostItTextBlock: React.FC<props> = ({ block, index, userEditing = false, o
               <EditTextBlockButton />
             </div>}
           {userEditing ?
-            <textarea ref={inputRef} style={{
-              outline: "none",
-              resize: "none",
-              border: "none",
-              width: "100%",
-              height: "100%",
-              backgroundColor: "transparent"
-            }} onChange={(e) => { onChangeEventHandler(e.target.value, block.id); }} value={block.text} />
+            <textarea ref={inputRef}
+              style={{
+                outline: "none",
+                paddingTop: "10px",
+                resize: "none",
+                border: "none",
+                width: "100%",
+                height: "100%",
+                backgroundColor: "transparent"
+              }}
+              onKeyDown={onKeyDownEventHandler}
+              onChange={(e) => { onChangeEventHandler(e.target.value, block.id); }}
+              value={block.text} />
             :
             <p>
               {block.text}
