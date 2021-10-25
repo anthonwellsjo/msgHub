@@ -57,5 +57,10 @@ namespace msgHub
       var data = new EditPostItHeaderFromServer(payload);
       await Clients.Group(groupName).SendAsync("editPostItHeader", data);
     }
+    public async Task NewDrawing(NewDrawingPayload payload, string groupName)
+    {
+      Console.WriteLine(payload.LastX.ToString(), payload.NewX.ToString());
+      await Clients.Group(groupName).SendAsync("newDrawing", payload);
+    }
   }
 }

@@ -30,7 +30,13 @@ input {
   font-size: 0.9em;
 }
 
-.subtitle{
+.subtitle {
   font-family: subtitle;
   font-size: 100;
+}
+
+.penCursor {
+  cursor: url('https://icons.iconarchive.com/icons/iconsmind/outline/24/Pen-2-icon.png') -40
+      80,
+    auto;
 }

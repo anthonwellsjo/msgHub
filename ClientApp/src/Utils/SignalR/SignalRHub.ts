@@ -8,6 +8,7 @@ import { tempWhiteBoardName } from "../Utils"
 import * as signalR from '@microsoft/signalr';
 import { NewPostItPayloadFromClient } from "../../Types/newPostItPayload"
 import { EditPostItHeaderFromClient } from "../../Types/editPostItHeader"
+import { NewDrawingPayload } from "../../Types/newDrawingPayload"
 
 type Payload = DeleteTextBlockFromClient |
   EditTextBlockTextFromClient |
@@ -16,6 +17,7 @@ type Payload = DeleteTextBlockFromClient |
   NewBlockTextPayloadFromClient |
   TrashPostItFromClient |
   EditPostItHeaderFromClient |
+  NewDrawingPayload |
   NewPostItPayloadFromClient;
 type Action = "editTextBlockText" |
   "deleteTextBlock" |
@@ -23,6 +25,7 @@ type Action = "editTextBlockText" |
   "movePostIt" |
   "trashPostIt" |
   "editPostItHeader" |
+  "newDrawing" |
   "newPostIt";
 
 export const SendToHub:
