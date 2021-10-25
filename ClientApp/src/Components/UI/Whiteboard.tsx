@@ -5,6 +5,7 @@ import { useAppSelector } from '../../Utils/Redux/hooks';
 import PostItBig from './PostItBig';
 import PostItSmall from './PostItSmall';
 import PostItTrashCan from './PostItTrashCan';
+import WhiteboardDrawingLayer from './WhiteboardDrawingLayer';
 
 const Whiteboard: React.FC = () => {
   const [openPostItId, setOpenPostItId] = useState<string | undefined>();
@@ -13,6 +14,7 @@ const Whiteboard: React.FC = () => {
   const postItMoving = whiteboard?.postits.find(p => p.position.isMoving);
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <WhiteboardDrawingLayer />
       {whiteboard?.postits.map(p => {
         if (openPostItId !== p.id) {
           return (
