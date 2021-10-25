@@ -22,7 +22,6 @@ const WhiteboardDrawingLayer: React.FC = () => {
 
   const onMouseMoveEventHandler: React.MouseEventHandler<HTMLCanvasElement> = (e) => {
     if (mouseIsDown) {
-      console.log(e.pageX, e.pageY);
       const x = e.pageX;
       const y = e.pageY;
       const payload: NewDrawingPayload = { lastX: pointerRef.current[0], lastY: pointerRef.current[1], newX: x, newY: y };
@@ -50,7 +49,6 @@ const WhiteboardDrawingLayer: React.FC = () => {
 
   const draw = (payload: NewDrawingPayload) => {
     var ctx = canvasRef.current?.getContext("2d");
-    console.log("drawing!!!", ctx);
     ctx?.moveTo(payload.lastX, payload.lastY);
     ctx?.lineTo(payload.newX, payload.newY);
     ctx?.stroke();
@@ -67,12 +65,10 @@ const WhiteboardDrawingLayer: React.FC = () => {
 
   useEffect(() => {
     if (canvasRef.current != null) {
-      (hubConnection as signalR.HubConnection).on("newDrawing", (payload: NewDrawingPayload) => {
-        draw(payload);
-      });
+      (hubConnection as signalR.HubConnection).on("newDrawing", draw);
     }
     return () => {
-
+      (hubConnection as signalR.HubConnection).off("newDrawing", draw);
     }
   }, [canvasRef])
 
