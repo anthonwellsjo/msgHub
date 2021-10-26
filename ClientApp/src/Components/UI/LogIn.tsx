@@ -66,14 +66,18 @@ const Login: React.FC = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <input style={{
-        outline: "none",
-        border: "none",
-        borderBottom: "3px solid black",
-        width: "200px",
-        textAlign: "center",
-        fontSize: "2em"
-      }}
+      <h3 style={{ fontFamily: "Rasa", fontSize: "3em", top: "100px", position: "absolute" }}>Tell us what's up</h3>
+      <input
+        placeholder="name"
+        style={{
+          outline: "none",
+          marginTop: "150px",
+          border: "none",
+          borderBottom: "3px solid black",
+          width: "200px",
+          textAlign: "center",
+          fontSize: "2em"
+        }}
         ref={loginRef}
         value={name}
         minLength={2}
@@ -87,12 +91,22 @@ const Login: React.FC = () => {
           width: "100px",
           height: "100px",
           borderRadius: "100px",
-          cursor: "pointer"
+          cursor: "pointer",
         }}
       >
-        {name.length < 1 && !generatingName && <svg onClick={onLoginEventHandler} stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height=".5em" width=".5em" xmlns="http://www.w3.org/2000/svg"><path d="M11.001 10H13.001V15H11.001zM11 16H13V18H11z"></path><path d="M13.768,4.2C13.42,3.545,12.742,3.138,12,3.138s-1.42,0.407-1.768,1.063L2.894,18.064 c-0.331,0.626-0.311,1.361,0.054,1.968C3.313,20.638,3.953,21,4.661,21h14.678c0.708,0,1.349-0.362,1.714-0.968 c0.364-0.606,0.385-1.342,0.054-1.968L13.768,4.2z M4.661,19L12,5.137L19.344,19H4.661z"></path></svg>}
-        {name.length > 0 && <svg onClick={onLoginEventHandler} stroke="currentColor" fill="currentColor" strokeWidth="0" version="1.1" viewBox="0 0 16 16" height=".5em" width=".5em" xmlns="http://www.w3.org/2000/svg"><path d="M6 8h-5v-2h5v-2l3 3-3 3zM16 0v13l-6 3v-3h-6v-4h1v3h5v-9l4-2h-9v4h-1v-5z"></path></svg>}
-        {generatingName && <Loader />}
+        {name.length < 1 && !generatingName &&
+          <div>
+            <svg onClick={onLoginEventHandler} stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height=".5em" width=".5em" xmlns="http://www.w3.org/2000/svg"><path d="M11.001 10H13.001V15H11.001zM11 16H13V18H11z"></path><path d="M13.768,4.2C13.42,3.545,12.742,3.138,12,3.138s-1.42,0.407-1.768,1.063L2.894,18.064 c-0.331,0.626-0.311,1.361,0.054,1.968C3.313,20.638,3.953,21,4.661,21h14.678c0.708,0,1.349-0.362,1.714-0.968 c0.364-0.606,0.385-1.342,0.054-1.968L13.768,4.2z M4.661,19L12,5.137L19.344,19H4.661z"></path></svg>
+            <p style={{ marginTop: "-10px", fontSize: "0.2em" }} className="subtitle" >Not enough for a name.</p>
+          </div>
+        }
+        {name.length > 0 &&
+          <div>
+            <svg onClick={onLoginEventHandler} stroke="currentColor" fill="currentColor" strokeWidth="0" version="1.1" viewBox="0 0 16 16" height=".5em" width=".5em" xmlns="http://www.w3.org/2000/svg"><path d="M6 8h-5v-2h5v-2l3 3-3 3zM16 0v13l-6 3v-3h-6v-4h1v3h5v-9l4-2h-9v4h-1v-5z"></path></svg>
+            <p style={{ marginTop: "-10px", fontSize: "0.2em" }} className="subtitle" >Good to go!</p>
+          </div>}
+
+        {generatingName && <div style={{}}><Loader imgSize={"0.5em"} title="Generating name" /></div>}
       </button>
     </div>
 

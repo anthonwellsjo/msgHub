@@ -189,9 +189,10 @@ const PostItSmall: React.FC<props> = (props) => {
       {props.PostIt.header.length > 0 && !editHeader &&
         <h4 style={{ textAlign: "center", fontFamily: "handwriting", fontSize: "1.2em", marginTop: "-10px", fontWeight: 600 }}>{props.PostIt.header}</h4>
       }
-      <div style={{ position: "absolute", bottom: "-10px", right: "5px", fontSize: "0.7em", textAlign: "right" }}>
-        <p className="subtitle">{props.PostIt.createdBy + " on " + new Date(props.PostIt.createdOn).toDateString() + "."}</p>
-      </div>
+       <div style={{ position: "absolute", color: "grey", right: "5px", bottom: "-10px", fontSize: "0.7em", textAlign:"right" }}>
+          <p>{<><strong>{props.PostIt.createdBy}</strong><br></br></>} on {new Date(props.PostIt.createdOn).toDateString()}</p>
+        </div>
+    
     </div >
   )
 }

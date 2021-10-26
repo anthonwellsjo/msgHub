@@ -33,7 +33,7 @@ input {
 
 .subtitle {
   font-family: subtitle;
-  font-size: 100;
+  font-weight: 100;
 }
 
 .penCursor {

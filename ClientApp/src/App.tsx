@@ -34,8 +34,8 @@ function App() {
       <Header />
       <Body>
         {userStatus === "Offline" && <Login />}
-        {userStatus === "Pending" && <Loader title="Logging in." />}
-        {userStatus === "Online" && whiteboardFetchStatus === "pending" && <Loader title="Fetching whiteboard" />}
+        {userStatus === "Pending" && <Loader fontSize="0.8em" title="Logging in." />}
+        {userStatus === "Online" && whiteboardFetchStatus === "pending" && <Loader fontSize="0.8em" title="Fetching whiteboard" />}
         {userStatus === "Online" && whiteboardFetchStatus === "done" && <Whiteboard />}
       </Body>
     </div>
