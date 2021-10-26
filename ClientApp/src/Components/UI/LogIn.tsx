@@ -1,11 +1,8 @@
 import React, { createRef, useContext, useEffect, useRef, useState } from 'react';
-import { AlertItem } from '../../Types/alertItem';
 import { loginUser } from '../../Utils/api';
-import { AlertContext } from '../../Utils/Context/alertContext';
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { setUserName, setUserStatus } from '../../Utils/Redux/features/msgHub/userSlice';
-import { setUsersLoggedIn } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
-import { useAppDispatch, useAppSelector } from '../../Utils/Redux/hooks';
+import { useAppDispatch } from '../../Utils/Redux/hooks';
 import { randomName, tempWhiteBoardName } from '../../Utils/Utils';
 import Loader from './Loader';
 
@@ -19,7 +16,7 @@ const Login: React.FC = () => {
     nameRef.current = name;
   }
   const [generatingName, setGeneratingName] = useState(false);
-  const [hubConnection, setHubConnection] = useContext<any>(HubConnectionContext);
+  const [hubConnection] = useContext<any>(HubConnectionContext);
   const dispatch = useAppDispatch();
   const loginRef: React.RefObject<HTMLInputElement> = createRef();
 
@@ -83,7 +80,7 @@ const Login: React.FC = () => {
         maxLength={10}
         onChange={(e) => { setNameExpanded(e.target.value) }} type="text" />
       <button
-      className="button"
+        className="button"
         style={{
           marginTop: "50px",
           fontSize: "3em",
