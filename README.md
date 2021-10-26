@@ -1,8 +1,8 @@
 # msgHub
 
 ## Installation
-- [1] dotnet restore
-- [2] dotnet run
+- dotnet restore
+- dotnet run
 
 ## Concept
 
