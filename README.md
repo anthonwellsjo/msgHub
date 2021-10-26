@@ -1,5 +1,9 @@
 # msgHub
 
+## Installation
+- [1] dotnet restore
+- [2] dotnet run
+
 ## Concept
 
 Collaborative white board application for YMCA Hotels. Updates UI with ASP.Net Core SignalR to let staff communicate working task inrealtime drawing, or writing on a common document.
