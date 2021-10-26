@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { DeleteTextBlockFromClient } from '../../Types/deleteTextBlock';
 import { EditTextBlockTextFromClient } from '../../Types/editTextBlockText';
 import { NewBlockTextPayloadFromClient } from '../../Types/newBlockTextPayload';
@@ -8,7 +8,6 @@ import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { selectUserName } from '../../Utils/Redux/features/msgHub/userSlice';
 import { useAppSelector } from '../../Utils/Redux/hooks';
 import { SendToHub } from '../../Utils/SignalR/SignalRHub';
-import { GetRandomColor, tempWhiteBoardName } from '../../Utils/Utils';
 import AddTextBlockButton from './AddTextBlockButton';
 import Loader from './Loader';
 import PlusButton from './PlusButton';

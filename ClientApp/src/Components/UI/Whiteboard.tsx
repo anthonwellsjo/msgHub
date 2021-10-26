@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { PostIt } from '../../Types/postIt';
 import { selectWhiteboard } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
 import { useAppSelector } from '../../Utils/Redux/hooks';
 import PostItBig from './PostItBig';
