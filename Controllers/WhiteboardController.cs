@@ -21,7 +21,6 @@ namespace msgHub.Controllers
     public async Task<Whiteboard> Get(string id)
     {
       var board = await _appContext.GetWhiteBoard();
-      Console.WriteLine(id);
       return board;
     }
 

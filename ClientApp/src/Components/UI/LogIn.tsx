@@ -83,10 +83,8 @@ const Login: React.FC = () => {
         maxLength={10}
         onChange={(e) => { setNameExpanded(e.target.value) }} type="text" />
       <button
+      className="button"
         style={{
-          backgroundColor: "transparent",
-          border: "none",
-          outline: "none",
           marginTop: "50px",
           fontSize: "3em",
           width: "100px",

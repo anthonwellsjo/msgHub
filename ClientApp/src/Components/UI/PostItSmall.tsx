@@ -164,7 +164,10 @@ const PostItSmall: React.FC<props> = (props) => {
         flexDirection: "column",
       }}>
       {props.PostIt.header.length < 1 && props.PostIt.createdBy === username && !editHeader &&
-        <button onClick={() => { setEditHeader(true); }}>
+        <button
+          style={{ width: "100px", height: "100px", cursor: "crosshair" }}
+          className="button"
+          onClick={(e) => { e.stopPropagation(); setEditHeader(true); }}>
           <PlusButton />
         </button>
       }

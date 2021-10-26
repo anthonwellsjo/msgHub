@@ -25,10 +25,8 @@ namespace msgHub.Controllers
       try
       {
         await _appContext.LogInUser(username);
-        Console.WriteLine(username + whiteBoardName + connectionId);
         await _hubContext.Groups.AddToGroupAsync(connectionId, whiteBoardName);
         var payload = new UserLoggedInPayload { UserName = username, DateTime = DateTime.Now };
-        Console.WriteLine(payload.UserName + " " + payload.DateTime);
         await _hubContext.Clients.Group(whiteBoardName).SendAsync("userLoggedIn", payload);
         return Ok();
       }

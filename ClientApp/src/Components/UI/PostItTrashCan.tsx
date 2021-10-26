@@ -2,10 +2,9 @@ import React, { useContext, useState } from 'react';
 import { TrashPostItFromClient } from '../../Types/trashPostIt';
 import { HubConnectionContext } from '../../Utils/Context/HubConnectionContext';
 import { selectUserName } from '../../Utils/Redux/features/msgHub/userSlice';
-import { selectWhiteboard, trashPostIt } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
-import { useAppDispatch, useAppSelector } from '../../Utils/Redux/hooks';
+import { selectWhiteboard } from '../../Utils/Redux/features/msgHub/whiteboardSlice';
+import { useAppSelector } from '../../Utils/Redux/hooks';
 import { SendToHub } from '../../Utils/SignalR/SignalRHub';
-import { tempWhiteBoardName } from '../../Utils/Utils';
 
 const PostItTrashCan: React.FC = () => {
   const [hover, setHover] = useState(false);
