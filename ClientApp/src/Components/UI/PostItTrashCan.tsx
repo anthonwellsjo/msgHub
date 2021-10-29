@@ -11,6 +11,7 @@ const PostItTrashCan: React.FC = () => {
   const [hubConnection] = useContext(HubConnectionContext);
   const whiteboard = useAppSelector(selectWhiteboard);
   const username = useAppSelector(selectUserName);
+
   const TrashPostItEventHandler = () => {
     const postItId = whiteboard?.postits.find(p => p.position.isMoving)?.id;
     if (postItId !== undefined && username) {
